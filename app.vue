@@ -1,5 +1,5 @@
 <template>
-  <div class="font-rubik">
+  <div class="font-rubik text-gray-100">
     <NuxtPage />
   </div>
 </template>
