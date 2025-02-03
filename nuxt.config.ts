@@ -26,10 +26,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxt/eslint',
-    '@nuxt/icon',
     '@nuxt/fonts',
     '@nuxt/scripts',
-    '@nuxt/ui'
   ],
   tailwindcss: {
     exposeConfig: true,
