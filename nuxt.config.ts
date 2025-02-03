@@ -55,7 +55,4 @@ export default defineNuxtConfig({
     locales: languages,
     defaultLocale: 'en-US',
   },
-  nitro: {
-    preset: 'vercel-edge',
-  }
 })
