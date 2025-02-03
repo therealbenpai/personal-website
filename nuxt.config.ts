@@ -17,7 +17,13 @@ export default defineNuxtConfig({
   },
   $production: {
     routeRules: {
-      '/**': { isr: true }
+      '/**': { isr: true },
+      '/api/**': {
+        isr: false,
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      },
     }
   },
   $development: {},
