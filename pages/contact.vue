@@ -4,16 +4,18 @@ useHead({
 })
 
 useSeoMeta({
+    description: 'You can contact me through the following methods.',
     ogTitle: 'Contact',
     ogDescription: 'You can contact me through the following methods.',
     ogUrl: 'https://benshawmean.com/contact',
-    ogImage: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11',
+    ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
     ogImageAlt: 'Profile Picture',
     ogType: 'website',
+    ogSiteName: 'Benpai\'s Website',
     twitterCard: 'summary_large_image',
     twitterTitle: 'Contact',
     twitterDescription: 'You can contact me through the following methods.',
-    twitterImage: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11',
+    twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
     twitterImageAlt: 'Profile Picture',
     twitterSite: '@therealbenpai',
     twitterCreator: '@therealbenpai',

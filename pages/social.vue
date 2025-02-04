@@ -4,16 +4,18 @@ useHead({
 })
 
 useSeoMeta({
+    description: 'A list of all of my social media accounts.',
     ogTitle: 'Social Accounts',
     ogDescription: 'A list of all of my social media accounts.',
     ogUrl: 'https://benshawmean.com/social',
-    ogImage: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11',
+    ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
     ogImageAlt: 'Profile Picture',
     ogType: 'website',
+    ogSiteName: 'Benpai\'s Website',
     twitterCard: 'summary_large_image',
     twitterTitle: 'Social Accounts',
     twitterDescription: 'A list of all of my social media accounts.',
-    twitterImage: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11',
+    twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
     twitterImageAlt: 'Profile Picture',
     twitterSite: '@therealbenpai',
     twitterCreator: '@therealbenpai',

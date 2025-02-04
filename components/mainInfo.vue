@@ -2,7 +2,7 @@
     <div class="md:flex block md:flex-col gap-2 w-1/2">
         <div class="flex flex-col padding-4 gap-6">
             <img
-                src="https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11"
+                src="https://cdn.benshawmean.com/meta-banner.png"
                 alt="Profile Picture"
                 class="size-[200px] rounded-2xl"
             />
