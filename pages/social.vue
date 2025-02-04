@@ -1,4 +1,24 @@
 <script setup lang="ts">
+useHead({
+    title: 'Social Accounts',
+})
+
+useSeoMeta({
+    ogTitle: 'Social Accounts',
+    ogDescription: 'A list of all of my social media accounts.',
+    ogUrl: 'https://benshawmean.com/social',
+    ogImage: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11',
+    ogImageAlt: 'Profile Picture',
+    ogType: 'website',
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'Social Accounts',
+    twitterDescription: 'A list of all of my social media accounts.',
+    twitterImage: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11',
+    twitterImageAlt: 'Profile Picture',
+    twitterSite: '@therealbenpai',
+    twitterCreator: '@therealbenpai',
+})
+
 interface SocialMediaAccount {
     username: string;
     identifier: string;
@@ -53,12 +73,12 @@ const socialMediaAccounts: SocialMediaAccount[] = [
 
 <template>
     <div
-        class="flex flex-row px-32 py-16 padding-4 gap-2 bg-[#282C34] h-screen font-rubik absolute top-0"
+        class="hidden md:flex flex-row px-32 py-16 p-4 gap-2 bg-[#282C34] h-screen font-rubik absolute top-0"
     >
         <MainInfo />
         <div class="flex flex-col gap-2 w-1/2 pl-12">
             <NavBar />
-            <div class="flex flex-col mt-8 padding-4 gap-4">
+            <div class="flex flex-col mt-8 p-4 gap-4">
                 <h1 class="text-4xl font-bold">Social Accounts</h1>
                 <p class="text-lg">
                     You can find me on the following platforms:
@@ -72,4 +92,5 @@ const socialMediaAccounts: SocialMediaAccount[] = [
             </div>
         </div>
     </div>
+    <MobileWarning />
 </template>

@@ -1,4 +1,24 @@
 <script setup lang="ts">
+useHead({
+    title: 'Projects',
+})
+
+useSeoMeta({
+    ogTitle: 'Projects',
+    ogDescription: 'A list of all of my projects.',
+    ogUrl: 'https://benshawmean.com/projects',
+    ogImage: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11',
+    ogImageAlt: 'Profile Picture',
+    ogType: 'website',
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'Projects',
+    twitterDescription: 'A list of all of my projects.',
+    twitterImage: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11',
+    twitterImageAlt: 'Profile Picture',
+    twitterSite: '@therealbenpai',
+    twitterCreator: '@therealbenpai',
+})
+
 interface Project {
     name: string;
     description: string;
@@ -7,6 +27,14 @@ interface Project {
     status: 'in progress' | 'beta' | 'released';
 }
 const projects: Project[] = [
+    {
+        name: 'Personal Portfolio',
+        description:
+            'My personal portfolio is a website that showcases my work. It is built with Nuxt and Vue 3.',
+        link: 'https://benshawmean.com',
+        public: true,
+        status: 'released',
+    },
     {
         name: 'FemDevs Website',
         description:
@@ -27,7 +55,7 @@ const projects: Project[] = [
         name: 'FemDevs API',
         description:
             'The FemDevs API is an API that is used in the FemDevs website. It is built with Express and TypeScript.',
-        link: 'docs.api.thefemdevs.com',
+        link: 'https://docs.api.thefemdevs.com',
         public: true,
         status: 'released',
     },
@@ -76,12 +104,12 @@ const projects: Project[] = [
 
 <template>
     <div
-        class="flex flex-row px-32 py-16 padding-4 gap-2 bg-[#282C34] h-screen font-rubik absolute top-0"
+        class="hidden md:flex flex-row px-32 py-16 p-4 gap-2 bg-[#282C34] h-screen font-rubik absolute top-0"
     >
         <MainInfo />
         <div class="flex flex-col gap-2 w-1/2 pl-12">
             <NavBar />
-            <div class="flex flex-col mt-8 padding-4 gap-4 overflow-auto">
+            <div class="flex flex-col mt-8 p-4 gap-4 overflow-auto">
                 <h1 class="text-4xl font-bold">Projects</h1>
                 <p class="text-lg">
                     The following are some of the projects I have worked on.
@@ -132,4 +160,5 @@ const projects: Project[] = [
             </div>
         </div>
     </div>
+    <MobileWarning />
 </template>

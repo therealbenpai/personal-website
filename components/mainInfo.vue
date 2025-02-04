@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-2 w-1/2">
+    <div class="md:flex block md:flex-col gap-2 w-1/2">
         <div class="flex flex-col padding-4 gap-6">
             <img
                 src="https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11"
