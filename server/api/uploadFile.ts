@@ -16,17 +16,17 @@ export default defineEventHandler(async (event) => {
         endpoint: `https://s3.${RTC.aws.region}.amazonaws.com`,
     });
     const body = await readBody(event) as Record<string, string>
-    const originalname = body.filename;
-    const baseExtension = originalname.split('.').pop();
-    if (!baseExtension) {
+    const originalname = body.filename!;
+    if (!originalname) {
         return createError({
             statusCode: 400,
             statusText: 'Bad Request',
-            statusMessage: 'Missing file extension',
+            statusMessage: 'Missing file name',
         })
     }
+    const baseExtension = originalname.split('.').pop()!;
     const key = `${crypto.randomBytes(16).toString('base64url')}.${baseExtension}`;
-    const file = dataUriToBuffer(body.data)
+    const file = dataUriToBuffer(body.data!)
     try {
         const upload = new Upload({
             client: s3,
