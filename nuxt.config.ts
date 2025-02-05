@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     }
   },
   $development: {},
-  $env: {staging: {}},
+  $env: { staging: {} },
   app: {
     head: {
       meta: [
@@ -31,6 +31,21 @@ export default defineNuxtConfig({
   },
   compatibilityDate: {
     default: '2024-11-01',
+  },
+  content: {
+    renderer: {
+      anchorLinks: true,
+    },
+    watch: {
+      enabled: true,
+    },
+    build: {
+      markdown: {
+        highlight: {
+          theme: 'github-dark',
+        }
+      }
+    }
   },
   devtools: {
     enabled: true,
@@ -63,6 +78,8 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/scripts',
+    '@nuxt/icon',
+    '@nuxt/content'
   ],
   runtimeConfig: {
     aws: {

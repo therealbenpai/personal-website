@@ -10,8 +10,8 @@ const links: Link[] = [
         url: '/',
     },
     {
-        name: 'About',
-        url: '/about',
+        name: 'Blog',
+        url: '/blog',
     },
     {
         name: 'Projects',

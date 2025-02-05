@@ -1,4 +1,4 @@
-export const { format: formatNumber } = new Intl.DateTimeFormat('en-US', {
+export const { format: formatFullDateTime } = new Intl.DateTimeFormat('en-US', {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -8,6 +8,20 @@ export const { format: formatNumber } = new Intl.DateTimeFormat('en-US', {
     weekday: "long",
     timeZone: "America/Detroit",
     timeZoneName: "longGeneric",
+})
+
+export const { format: formatDate } = new Intl.DateTimeFormat('en-US', {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "America/Detroit",
+})
+
+export const { format: formatTime } = new Intl.DateTimeFormat('en-US', {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZone: "America/Detroit",
 })
 
 export const {format: formatCurrency} = new Intl.NumberFormat('en-US', {

@@ -120,7 +120,7 @@ const projects: Project[] = [
                     <div
                         v-for="project in projects"
                         :key="project.name"
-                        class="bg-[#21252b] p-4 rounded-2xl"
+                        class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
                     >
                         <a :href="project.link">
                             <div class="flex flex-col gap-2">

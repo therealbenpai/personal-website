@@ -83,9 +83,10 @@ async function upload() {
             <button type="submit" class="px-8 py-4 bg-slate-400 rounded-xl">
                 Upload
             </button>
-            <div v-if="link">
+            <div v-if="link" class="flex flex-col gap-4">
                 <p>File Uploaded Successfully</p>
                 <a :href="`https://cdn.benshawmean.com/${link}`" target="_blank"
+                    class="text-blue-500"
                     >Link to file</a
                 >
             </div>
