@@ -21,6 +21,7 @@
     "lodash": "^4.17.21",
     "mime-types": "^2.1.35",
     "nuxt": "^3.15.2",
+    "pg": "^8.13.1",
     "vue": "latest",
     "vue-router": "latest"
   },

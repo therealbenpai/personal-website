@@ -22,8 +22,6 @@ useSeoMeta({
 })
 
 const { data: posts } = await useAsyncData(`blog-posts`, () => queryCollection('blog').all());
-console.dir(posts.value);
-const formattedPosts = posts.value
 </script>
 
 <template>

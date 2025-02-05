@@ -20,8 +20,8 @@ const post = posts.value;
                 class="flex flex-col mt-8 p-4 gap-4 overflow-y-auto"
             >
                 <h1 class="text-4xl font-bold">{{ post.title }}</h1>
-                <div class="flex flex-col gap-2">
-                    <ContentRenderer v-if="post" :value="post" prose/>
+                <div class="flex flex-col gap-2 ">
+                    <ContentRenderer v-if="post" :value="post" :prose="true"/>
                 </div>
             </div>
             <div v-else class="flex flex-col mt-8 p-4 gap-4 overflow-y-auto">
