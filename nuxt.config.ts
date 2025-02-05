@@ -13,6 +13,10 @@ export default defineNuxtConfig({
           'Cache-Control': 'no-cache'
         }
       },
+      '/blog/**': {
+        isr: false,
+        ssr: true,
+      }
     }
   },
   $development: {},
