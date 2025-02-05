@@ -1,24 +1,13 @@
 ---
-title: Welcome
+title: My First Blog Post
 date: 2025-02-03 00:00:00 +0500
-description: Welcome to my blog
+description: My very first blog post
 navigation: false
 ---
 
-## [Welcome to my blog]{.text-3xl}
-
-This is my first blog post. I hope you enjoy it!
-
-and the following configuration in your `config.yaml`:
-
-```yaml [config.yaml]
-contentDir: content
-```
-
-The following files will be generated:
-
-```plaintext
-content
-└── blog
-    └── welcome.md
-```
+<div class="flex flex-col gap-4">
+    <ProseH1 class="text-3xl font-bold">Welcome to my blog</ProseH1>
+    <ProseP class="text-lg">This is a blog where I write about my thoughts and experiences. I hope you enjoy reading it.</ProseP>
+    <ProseH2 class="text-2xl font-bold">About me</ProseH2>
+    <ProseP class="text-lg">I am a software developer based in the United States. I have been working in the tech industry for over 10 years.</ProseP>
+</div>

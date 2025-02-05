@@ -33,6 +33,10 @@ export default defineNuxtConfig({
     default: '2024-11-01',
   },
   content: {
+    database: {
+      type: 'postgres',
+      url: process.env.POSTGRES_URL!,
+    },
     preview: {
       api: 'https://api.nuxt.studio',
       dev: true
