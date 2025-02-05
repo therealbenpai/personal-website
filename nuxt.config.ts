@@ -38,8 +38,8 @@ export default defineNuxtConfig({
   },
   content: {
     database: {
-      type: 'postgres',
-      url: process.env.POSTGRES_URL!,
+      type: 'd1',
+      bindingName: 'main',
     },
     preview: {
       api: 'https://api.nuxt.studio',

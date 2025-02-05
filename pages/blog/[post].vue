@@ -26,10 +26,9 @@ const postDate = post ? new Date(post.date) : null;
                 <span class="text-gray-500 text-lg">{{
                     formatDate(postDate!) + ' at ' + formatTime(postDate!)
                 }}</span>
-
-                <ProseHr />
+                <hr />
                 <div class="flex flex-col gap-2 mt-4">
-                    <ContentRenderer :value="post" :prose="true" />
+                    <ContentRenderer :value="post" prose />
                 </div>
             </div>
             <div v-else class="flex flex-col mt-8 p-4 gap-4 overflow-y-auto">
