@@ -33,6 +33,9 @@ export default defineNuxtConfig({
     default: '2024-11-01',
   },
   content: {
+    preview: {
+      api: 'https://api.nuxt.studio'
+    },
     renderer: {
       anchorLinks: true,
     },
