@@ -91,7 +91,8 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/scripts',
     '@nuxt/icon',
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/turnstile',
   ],
   runtimeConfig: {
     cloudflare: {
@@ -99,9 +100,6 @@ export default defineNuxtConfig({
         accessKeyId: process.env.R2_ACCESS_KEY_ID,
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
       },
-    },
-    turnstile: {
-      secretKey: process.env.TURNSTILE_SECRET_KEY,
     },
   },
   tailwindcss: {
@@ -111,6 +109,7 @@ export default defineNuxtConfig({
   },
   turnstile: {
     siteKey: process.env.TURNSTILE_SITE_KEY,
+    secretKey: process.env.TURNSTILE_SECRET_KEY,
   },
   typescript: {
     typeCheck: "build",
