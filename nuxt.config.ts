@@ -43,7 +43,7 @@ const headers = CORS.Headers({
           'fontawesome.com', 'jsdelivr.net',
           'preline.co', 'accounts.dev',
           'vercel-scripts.com', 'clerk.dev',
-          'cloudflare.com'
+          'cloudflare.com', 'cloudflareinsights.com',
         ].map(CORS.WebSecurity.CD),
       ].flat(2),
     ),
