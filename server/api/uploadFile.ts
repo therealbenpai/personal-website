@@ -1,19 +1,17 @@
-import { S3, type ObjectCannedACL } from '@aws-sdk/client-s3';
-import { Upload } from '@aws-sdk/lib-storage';
+import { S3, PutObjectCommand } from '@aws-sdk/client-s3';
 import MIME from 'mime-types';
 import crypto from 'crypto';
-import {dataUriToBuffer} from 'data-uri-to-buffer';
+import { dataUriToBuffer } from 'data-uri-to-buffer';
 
 export default defineEventHandler(async (event) => {
     const RTC = useRuntimeConfig();
     const s3 = new S3({
-        region: RTC.aws.region,
         bucketEndpoint: false,
         credentials: {
-            accessKeyId: RTC.aws.auth.accessKeyId,
-            secretAccessKey: RTC.aws.auth.secretAccessKey,
+            accessKeyId: RTC.cloudflare.auth.accessKeyId,
+            secretAccessKey: RTC.cloudflare.auth.secretAccessKey,
         },
-        endpoint: `https://s3.${RTC.aws.region}.amazonaws.com`,
+        endpoint: `https://41cdb69f198920b7940bbd93f0192ee8.r2.cloudflarestorage.com`,
     });
     const body = await readBody(event) as Record<string, string>
     const originalname = body.filename!;
@@ -28,22 +26,19 @@ export default defineEventHandler(async (event) => {
     const key = `${crypto.randomBytes(16).toString('base64url')}.${baseExtension}`;
     const file = dataUriToBuffer(body.data!)
     try {
-        const upload = new Upload({
-            client: s3,
-            params: {
-                Bucket: 'maincdnbucket',
-                ACL: 'public-read' as ObjectCannedACL,
-                Key: key,
-                Body: Buffer.from(file.buffer),
-                ContentType: MIME.contentType(originalname) || 'application/octet-stream',
-            }
+        const command = new PutObjectCommand({
+            Bucket: 'cdn',
+            Key: key,
+            Body: Buffer.from(file.buffer),
+            ContentType: MIME.contentType(originalname) || 'application/octet-stream',
         });
-        await upload.done();
+        await s3.send(command);
         return {
             message: 'File uploaded successfully',
             key,
         }
     } catch (error) {
+        console.error(error);
         return createError({
             statusCode: 500,
             statusText: 'Internal Server Error',

@@ -17,6 +17,7 @@
     "@nuxt/scripts": "0.9.5",
     "@nuxtjs/mdc": "0.13.2",
     "@nuxtjs/tailwindcss": "6.13.1",
+    "@nuxtjs/turnstile": "0.9.11",
     "data-uri-to-buffer": "^6.0.2",
     "lodash": "^4.17.21",
     "mime-types": "^2.1.35",

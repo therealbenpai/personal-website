@@ -1,20 +1,20 @@
 <script setup lang="ts">
 useHead({
-    title: 'About Me',
+    title: 'Blog Posts',
 });
 
 useSeoMeta({
-    description: 'A little bit about me.',
-    ogTitle: 'About Me',
-    ogDescription: 'A little bit about me.',
-    ogUrl: 'https://benshawmean.com/about',
+    description: 'Blog posts by Benpai.',
+    ogTitle: 'Blog Posts',
+    ogDescription: 'Blog posts by Benpai.',
+    ogUrl: 'https://benshawmean.com/blog',
     ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
     ogImageAlt: 'Profile Picture',
     ogType: 'website',
     ogSiteName: "Benpai's Website",
     twitterCard: 'summary_large_image',
-    twitterTitle: 'About Me',
-    twitterDescription: 'A little bit about me.',
+    twitterTitle: 'Blog Posts',
+    twitterDescription: 'Blog posts by Benpai.',
     twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
     twitterImageAlt: 'Profile Picture',
     twitterSite: '@therealbenpai',

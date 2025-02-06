@@ -94,18 +94,23 @@ export default defineNuxtConfig({
     '@nuxt/content'
   ],
   runtimeConfig: {
-    aws: {
-      region: 'us-east-2',
+    cloudflare: {
       auth: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: process.env.R2_ACCESS_KEY_ID,
+        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
       },
+    },
+    turnstile: {
+      secretKey: process.env.TURNSTILE_SECRET_KEY,
     },
   },
   tailwindcss: {
     exposeConfig: true,
     viewer: { endpoint: '/_tailwind', exportViewer: true },
     config: TailwindsConfig as any
+  },
+  turnstile: {
+    siteKey: process.env.TURNSTILE_SITE_KEY,
   },
   typescript: {
     typeCheck: "build",
