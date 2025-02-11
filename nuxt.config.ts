@@ -115,7 +115,7 @@ export default defineNuxtConfig({
         { name: 'color-scheme', content: 'dark' },
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: 'https://benshawmean.com/assets/images/grav/329f481757ca49ce98d31d9041285a11' },
+        { rel: 'icon', type: 'image/png', href: 'https://thefemdevs.com/assets/images/grav/329f481757ca49ce98d31d9041285a11' },
       ],
     }
   },

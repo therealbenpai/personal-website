@@ -43,6 +43,7 @@ export default defineEventHandler(async (event) => {
             statusCode: 500,
             statusText: 'Internal Server Error',
             statusMessage: 'Failed to upload file',
+            message: (error as Error).message,
         });
     }
 });
