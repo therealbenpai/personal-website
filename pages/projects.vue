@@ -21,19 +21,21 @@ useSeoMeta({
     twitterCreator: '@therealbenpai',
 });
 
+type ProjectStatus = 'in progress' | 'beta' | 'released' | 'archived' | 'dropped';
+
 interface Project {
     name: string;
     description: string;
     link: string;
     public: boolean;
-    status: 'in progress' | 'beta' | 'released';
+    status: ProjectStatus;
 }
 const projects: Project[] = [
     {
         name: 'Personal Portfolio',
         description:
             'My personal portfolio is a website that showcases my work. It is built with Nuxt and Vue 3.',
-        link: 'https://benshawmean.com',
+        link: 'https://github.com/therealbenpai/personal-website',
         public: true,
         status: 'released',
     },
@@ -41,7 +43,7 @@ const projects: Project[] = [
         name: 'FemDevs Website',
         description:
             'The FemDevs website is a website for the FemDevs community. It is built with Nuxt and Vue 3.',
-        link: 'https://thefemdevs.com',
+        link: 'https://github.com/therealbenpai/femdevs-rewrite-pt2',
         public: true,
         status: 'released',
     },
@@ -105,42 +107,87 @@ const projects: Project[] = [
 </script>
 
 <template>
-    <div class="grid grid-cols-1 gap-4 overflow-y-auto">
-        <div
-            v-for="project in projects"
-            :key="project.name"
-            class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
-        >
-            <a :href="project.link">
-                <div class="flex flex-col gap-2">
-                    <h2 class="text-2xl font-semibold">
-                        {{ project.name }}
-                    </h2>
-                    <p class="text-lg">{{ project.description }}</p>
-                    <div class="flex flex-row gap-4 my-2">
-                        <span
-                            :class="{
-                                'bg-green-500': project.public,
-                                'bg-red-500': !project.public,
-                            }"
-                            class="text-md px-4 py-1 rounded-2xl"
-                            >{{
-                                project.public ? 'open source' : 'closed source'
-                            }}</span
-                        >
-                        <span
-                            :class="{
-                                'bg-green-500': project.status === 'released',
-                                'bg-yellow-500': project.status === 'beta',
-                                'bg-orange-500':
-                                    project.status === 'in progress',
-                            }"
-                            class="text-md px-4 py-1 rounded-2xl"
-                            >{{ project.status }}</span
-                        >
+    <div class="flex flex-col mt-8 p-4 gap-4 overflow-y-auto">
+        <h1 class="text-4xl font-bold">Projects</h1>
+        <p class="text-lg">
+            Here is a list of all of my projects. You can find more information
+            about each project by clicking on the project name.
+        </p>
+        <div class="grid grid-cols-1 gap-4">
+            <div
+                v-for="project in projects"
+                :key="project.name"
+                class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
+            >
+                <a :href="project.link">
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-2xl font-semibold">
+                            {{ project.name }}
+                        </h2>
+                        <p class="text-lg">{{ project.description }}</p>
+                        <div class="flex flex-row gap-4 my-2">
+                            <span
+                                :class="{
+                                    'bg-green-500': project.public,
+                                    'bg-red-500': !project.public,
+                                }"
+                                class="text-md px-4 py-1 rounded-2xl"
+                            >
+                                <Icon
+                                    :name="(() => {
+                                        switch (project.public) {
+                                            case true:
+                                                return 'material-symbols:book-outline';
+                                            case false:
+                                                return 'material-symbols:lock-outline';
+                                        }
+                                    })()"
+                                    size="16px"
+                                    class="translate-y-0.5"
+                                />
+                                {{
+                                    project.public
+                                        ? 'open source'
+                                        : 'closed source'
+                                }}
+                            </span>
+                            <span
+                                :class="{
+                                    'bg-green-500':
+                                        project.status === 'released',
+                                    'bg-yellow-500': project.status === 'beta',
+                                    'bg-orange-500':
+                                        project.status === 'in progress',
+                                    'bg-red-500': project.status === 'archived',
+                                    'bg-gray-500': project.status === 'dropped',
+                                }"
+                                class="text-md px-4 py-1 rounded-2xl"
+                                >
+                                    <Icon
+                                        :name="(() => {
+                                            switch (project.status) {
+                                                case 'in progress':
+                                                    return 'heroicons-solid:clock';
+                                                case 'beta':
+                                                    return 'heroicons-solid:sparkles';
+                                                case 'released':
+                                                    return 'heroicons-solid:check-circle';
+                                                case 'archived':
+                                                    return 'heroicons-solid:archive';
+                                                case 'dropped':
+                                                    return 'heroicons-solid:x-circle';
+                                            }
+                                        })()"
+                                        size="16px"
+                                        class="translate-y-0.5"
+                                    />
+                                {{ project.status }}
+                                </span
+                            >
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </template>
