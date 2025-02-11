@@ -45,38 +45,27 @@ const contactMethods: ContactMethod[] = [
 </script>
 
 <template>
-    <div
-        class="hidden md:flex flex-row px-32 py-16 p-4 gap-2 bg-[#282C34] h-screen font-rubik absolute top-0"
-    >
-        <MainInfo />
-        <div class="flex flex-col gap-2 w-1/2 pl-12">
-            <NavBar />
-            <div class="flex flex-col mt-8 p-4 gap-4 overflow-auto">
-                <h1 class="text-4xl font-bold">Contact</h1>
-                <p class="text-lg">
-                    You can contact me through the following methods:
-                </p>
-                <div class="grid grid-col-1 gap-4">
-                    <div
-                        v-for="method in contactMethods"
-                        :key="method.name"
-                        class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
-                    >
-                        <a :href="method.link">
-                            <div class="flex flex-col gap-2">
-                                <div class="flex flex-row gap-6">
-                                    <h2 class="text-2xl font-semibold">
-                                    {{ method.name }}
-                                </h2>
-                                <Icon :name="method.icon" size="24px" />
-                                </div>
-                                <p class="text-lg">{{ method.identifier }}</p>
-                            </div>
-                        </a>
+    <div class="flex flex-col mt-8 p-4 gap-4 overflow-auto">
+        <h1 class="text-4xl font-bold">Contact</h1>
+        <p class="text-lg">You can contact me through the following methods:</p>
+        <div class="grid grid-col-1 gap-4">
+            <div
+                v-for="method in contactMethods"
+                :key="method.name"
+                class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
+            >
+                <a :href="method.link">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex flex-row gap-6">
+                            <h2 class="text-2xl font-semibold">
+                                {{ method.name }}
+                            </h2>
+                            <Icon :name="method.icon" size="24px" />
+                        </div>
+                        <p class="text-lg">{{ method.identifier }}</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
-    <MobileWarning />
 </template>

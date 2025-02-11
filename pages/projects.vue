@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useHead({
     title: 'Projects',
-})
+});
 
 useSeoMeta({
     description: 'A list of all of my projects.',
@@ -11,7 +11,7 @@ useSeoMeta({
     ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
     ogImageAlt: 'Profile Picture',
     ogType: 'website',
-    ogSiteName: 'Benpai\'s Website',
+    ogSiteName: "Benpai's Website",
     twitterCard: 'summary_large_image',
     twitterTitle: 'Projects',
     twitterDescription: 'A list of all of my projects.',
@@ -19,7 +19,7 @@ useSeoMeta({
     twitterImageAlt: 'Profile Picture',
     twitterSite: '@therealbenpai',
     twitterCreator: '@therealbenpai',
-})
+});
 
 interface Project {
     name: string;
@@ -105,62 +105,42 @@ const projects: Project[] = [
 </script>
 
 <template>
-    <div
-        class="hidden md:flex flex-row px-32 py-16 p-4 gap-2 bg-[#282C34] h-screen font-rubik absolute top-0"
-    >
-        <MainInfo />
-        <div class="flex flex-col gap-2 w-1/2 pl-12">
-            <NavBar />
-            <div class="flex flex-col mt-8 p-4 gap-4 overflow-auto">
-                <h1 class="text-4xl font-bold">Projects</h1>
-                <p class="text-lg">
-                    The following are some of the projects I have worked on.
-                </p>
-                <div class="grid grid-cols-1 gap-4 overflow-y-auto">
-                    <div
-                        v-for="project in projects"
-                        :key="project.name"
-                        class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
-                    >
-                        <a :href="project.link">
-                            <div class="flex flex-col gap-2">
-                                <h2 class="text-2xl font-semibold">
-                                    {{ project.name }}
-                                </h2>
-                                <p class="text-lg">{{ project.description }}</p>
-                                <div class="flex flex-row gap-4 my-2">
-                                    <span
-                                        :class="{
-                                            'bg-green-500': project.public,
-                                            'bg-red-500': !project.public,
-                                        }"
-                                        class="text-md px-4 py-1 rounded-2xl"
-                                        >{{
-                                            project.public
-                                                ? 'open source'
-                                                : 'closed source'
-                                        }}</span
-                                    >
-                                    <span
-                                        :class="{
-                                            'bg-green-500':
-                                                project.status === 'released',
-                                            'bg-yellow-500':
-                                                project.status === 'beta',
-                                            'bg-orange-500':
-                                                project.status ===
-                                                'in progress',
-                                        }"
-                                        class="text-md px-4 py-1 rounded-2xl"
-                                        >{{ project.status }}</span
-                                    >
-                                </div>
-                            </div>
-                        </a>
+    <div class="grid grid-cols-1 gap-4 overflow-y-auto">
+        <div
+            v-for="project in projects"
+            :key="project.name"
+            class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
+        >
+            <a :href="project.link">
+                <div class="flex flex-col gap-2">
+                    <h2 class="text-2xl font-semibold">
+                        {{ project.name }}
+                    </h2>
+                    <p class="text-lg">{{ project.description }}</p>
+                    <div class="flex flex-row gap-4 my-2">
+                        <span
+                            :class="{
+                                'bg-green-500': project.public,
+                                'bg-red-500': !project.public,
+                            }"
+                            class="text-md px-4 py-1 rounded-2xl"
+                            >{{
+                                project.public ? 'open source' : 'closed source'
+                            }}</span
+                        >
+                        <span
+                            :class="{
+                                'bg-green-500': project.status === 'released',
+                                'bg-yellow-500': project.status === 'beta',
+                                'bg-orange-500':
+                                    project.status === 'in progress',
+                            }"
+                            class="text-md px-4 py-1 rounded-2xl"
+                            >{{ project.status }}</span
+                        >
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
-    <MobileWarning />
 </template>

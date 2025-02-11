@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useHead({
     title: 'Social Accounts',
-})
+});
 
 useSeoMeta({
     description: 'A list of all of my social media accounts.',
@@ -11,7 +11,7 @@ useSeoMeta({
     ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
     ogImageAlt: 'Profile Picture',
     ogType: 'website',
-    ogSiteName: 'Benpai\'s Website',
+    ogSiteName: "Benpai's Website",
     twitterCard: 'summary_large_image',
     twitterTitle: 'Social Accounts',
     twitterDescription: 'A list of all of my social media accounts.',
@@ -19,7 +19,7 @@ useSeoMeta({
     twitterImageAlt: 'Profile Picture',
     twitterSite: '@therealbenpai',
     twitterCreator: '@therealbenpai',
-})
+});
 
 interface SocialMediaAccount {
     username: string;
@@ -35,14 +35,14 @@ const socialMediaAccounts: SocialMediaAccount[] = [
         identifier: '1158220643616182445',
         link: 'https://discord.com/users/1158220643616182445',
         platform: 'Discord',
-        icon: 'fa-brands:discord'
+        icon: 'fa-brands:discord',
     },
     {
         username: 'therealbenpai',
         identifier: 'therealbenpai',
         link: 'https://github/therealbenpai',
         platform: 'GitHub',
-        icon: 'fa-brands:github'
+        icon: 'fa-brands:github',
     },
     {
         username: 'benpai',
@@ -78,43 +78,32 @@ const socialMediaAccounts: SocialMediaAccount[] = [
         link: 'https://keyoxide.org/aspe:keyoxide.org:JI3O6H2RNBQYQGJCSZRZYMF7NU',
         platform: 'Keyoxide',
         icon: 'material-symbols:passkey-rounded',
-    }
-]
+    },
+];
 </script>
 
 <template>
-    <div
-        class="hidden md:flex flex-row px-32 py-16 p-4 gap-2 bg-[#282C34] h-screen font-rubik absolute top-0"
-    >
-        <MainInfo />
-        <div class="flex flex-col gap-2 w-1/2 pl-12 ">
-            <NavBar />
-            <div class="flex flex-col mt-8 p-4 gap-4 overflow-auto">
-                <h1 class="text-4xl font-bold">Social Accounts</h1>
-                <p class="text-lg">
-                    You can find me on the following platforms:
-                </p>
-                <div class="grid grid-col-1 gap-4">
-                    <div
-                        v-for="account in socialMediaAccounts"
-                        :key="account.platform"
-                        class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
-                    >
-                        <a :href="account.link">
-                            <div class="flex flex-col gap-2">
-                                <div class="flex flex-row gap-6">
-                                    <h2 class="text-2xl font-semibold">
-                                    {{ account.platform }}
-                                </h2>
-                                <Icon :name="account.icon" size="24px" />
-                                </div>
-                                <p class="text-lg">{{ account.username }}</p>
-                            </div>
-                        </a>
+    <div class="flex flex-col mt-8 p-4 gap-4 overflow-auto">
+        <h1 class="text-4xl font-bold">Social Accounts</h1>
+        <p class="text-lg">You can find me on the following platforms:</p>
+        <div class="grid grid-col-1 gap-4">
+            <div
+                v-for="account in socialMediaAccounts"
+                :key="account.platform"
+                class="bg-[#21252b] p-4 rounded-2xl border-2 border-transparent hover:bg-[#282C34] hover:border-slate-400"
+            >
+                <a :href="account.link">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex flex-row gap-6">
+                            <h2 class="text-2xl font-semibold">
+                                {{ account.platform }}
+                            </h2>
+                            <Icon :name="account.icon" size="24px" />
+                        </div>
+                        <p class="text-lg">{{ account.username }}</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
-    <MobileWarning />
 </template>

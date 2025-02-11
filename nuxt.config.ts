@@ -103,6 +103,12 @@ export default defineNuxtConfig({
         isr: false,
         ssr: true,
       }
+    },
+    content: {
+      database: {
+        type: 'd1',
+        bindingName: 'main',
+      },
     }
   },
   $development: {},
@@ -123,10 +129,6 @@ export default defineNuxtConfig({
     default: '2024-11-01',
   },
   content: {
-    database: {
-      type: 'd1',
-      bindingName: 'main',
-    },
     preview: {
       api: 'https://api.nuxt.studio',
       dev: true

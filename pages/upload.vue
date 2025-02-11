@@ -3,6 +3,10 @@ useHead({
     title: 'Upload',
 });
 
+definePageMeta({
+    layout: false,
+})
+
 useSeoMeta({
     description: 'Upload a file to the server.',
     ogTitle: 'Upload',

@@ -1,7 +1,9 @@
 <template>
   <div class="font-rubik text-gray-100">
     <NuxtTurnstile />
-    <NuxtPage />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
 

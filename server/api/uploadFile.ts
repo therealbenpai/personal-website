@@ -39,11 +39,6 @@ export default defineEventHandler(async (event) => {
         }
     } catch (error) {
         console.error(error);
-        return createError({
-            statusCode: 500,
-            statusText: 'Internal Server Error',
-            statusMessage: 'Failed to upload file',
-            message: (error as Error).message,
-        });
+        return createError((error as Error).message);
     }
 });
