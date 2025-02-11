@@ -45,7 +45,7 @@ const contactMethods: ContactMethod[] = [
 </script>
 
 <template>
-    <div class="flex flex-col mt-8 p-4 gap-4 overflow-auto">
+    <div class="flex flex-col mt-8 p-4 gap-4 overflow-y-auto">
         <h1 class="text-4xl font-bold">Contact</h1>
         <p class="text-lg">You can contact me through the following methods:</p>
         <div class="grid grid-col-1 gap-4">

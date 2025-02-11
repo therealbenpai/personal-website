@@ -1,5 +1,6 @@
-const config = {
+import { type ModuleOptions } from '@nuxtjs/tailwindcss';
 
+const config: ModuleOptions['config'] = {
     mode: 'jit',
     content: [
       "./pages/**/*.{js,ts,jsx,tsx,mdx,vue}",
@@ -36,6 +37,27 @@ const config = {
           'brand-black-dark': '#0D0D0D',
           'white': '#FFFFFF',
           'black': '#000000',
+          'navbar': '#21252b',
+          'background': '#282C34',
+          'languages': {
+            'css': '#264de4',
+            'html': '#e34c26',
+            'javascript': '#f7df1e',
+            'python': '#306998',
+            'java': '#007396',
+            'php': '#8892be',
+            'ruby': '#cc342d',
+            'csharp': '#68217a',
+            'typescript': '#3178c6',
+            'go': '#00add8',
+            'swift': '#ffac45',
+            'scala': '#dc322f',
+            'kotlin': '#0095d5',
+            'rust': '#dea584',
+            'elixir': '#4e2a8e',
+            'haskell': '#5e5086',
+            'shell': '#89e051',
+          }
         },
         backdropBlur: { '10xl': '10rem' },
         keyframes: {

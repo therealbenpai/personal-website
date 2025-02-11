@@ -32,11 +32,20 @@ const links: Link[] = [
         icon: 'mdi:email',
     },
 ];
+
+const isMobile = ref(false);
+
+onMounted(() => {
+    isMobile.value = window.innerWidth <= 768;
+    window.addEventListener('resize', () => {
+        isMobile.value = window.innerWidth <= 768;
+    });
+});
 </script>
 
 <template>
     <nav
-        class="flex flex-row gap-8 bg-[#21252b] md:mx-3 rounded-2xl space-x-6 px-3 py-2 md:px-6 md:py-4 w-full"
+        class="flex flex-row bg-navbar rounded-2xl space-x-6 px-6 w-full justify-evenly py-4"
     >
         <a
             v-for="link in links"
@@ -44,7 +53,10 @@ const links: Link[] = [
             :href="link.url"
             class="text-lg font-semibold text-white"
         >
-        <Icon :name="link.icon" size="24px" :aria-hidden="false" />
+            <span class="flex flex-col place-items-center gap-1">
+                <Icon :name="link.icon" size="24px" v-if="isMobile" />
+            <span class="hidden md:inline">{{ link.name }}</span>
+            </span>
         </a>
     </nav>
 </template>
