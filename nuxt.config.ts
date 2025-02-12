@@ -2,7 +2,70 @@
 
 import { languages } from './configs/languages';
 import TailwindsConfig from './configs/tailwinds.config';
-import headers from './configs/CORS';
+
+const caab = (v: any) => Array.isArray(v) && v;
+
+const CD = (domain: string) => Array.of(domain, `*.${domain} `);
+
+class CSPObj {
+  none: boolean;
+  directives: string[];
+  self: boolean;
+  wildcard: boolean;
+  domains: string[];
+  constructor(
+    none: boolean,
+    directives: string[],
+    self: boolean,
+    wildcard: boolean,
+    domains: string[]
+  ) {
+    this.none = none;
+    this.directives = directives;
+    this.self = self;
+    this.wildcard = wildcard;
+    this.domains = domains;
+  }
+  parse() {
+    if (this.none) return `'none'`;
+    return [
+      caab(this.directives) ? this.directives.map(v => `'${v}'`) : [],
+      this.wildcard ? '*' : '',
+      this.self ? "'self'" : '',
+      caab(this.domains) ? this.domains : [],
+    ].flat(2);
+  }
+}
+
+class PermissionPolicy {
+  none: boolean;
+  self: boolean;
+  wildcard: boolean;
+  src: boolean;
+  domains: string[];
+  constructor(data: {
+    none?: boolean,
+    self?: boolean,
+    wildcard?: boolean,
+    src?: boolean,
+    domains?: string[]
+  }) {
+    this.none = data.none ?? false;
+    this.self = data.self ?? false;
+    this.wildcard = data.wildcard ?? false;
+    this.src = data.src ?? false;
+    this.domains = data.domains ?? [];
+  }
+  toString() {
+    if (this.none) return '()';
+    if (this.wildcard) return '*';
+    return [
+      this.src ? 'src' : '',
+      this.self ? "self" : '',
+      caab(this.domains) ? this.domains : [],
+    ].flat(2);
+  }
+}
 
 export default defineNuxtConfig({
   $production: {
@@ -96,12 +159,9 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/content',
     '@nuxtjs/turnstile',
+    'nuxt-security'
   ],
-  routeRules: {
-    '/**': {
-      headers,
-    },
-  },
+  routeRules: {},
   runtimeConfig: {
     cloudflare: {
       auth: {
@@ -135,5 +195,120 @@ export default defineNuxtConfig({
     vueJsx: {
       mergeProps: true
     }
+  },
+  security: {
+    corsHandler: {
+      maxAge: String(864e2),
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      allowHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-HTTP-Method-Override', 'Accept', 'Origin'],
+    },
+    headers: {
+      contentSecurityPolicy: {
+        'img-src': new CSPObj(false, [], false, true, [
+          'data:', 'blob:',
+          [
+            'benshawmean.com', 'google.com',
+            'fontawesome.com', 'jsdelivr.net',
+            'preline.co', 'accounts.dev',
+            'vercel-scripts.com', 'clerk.dev',
+            'cloudflare.com', 'cloudflareinsights.com',
+            'thefemdevs.com', 'localhost',
+          ].map(CD),
+        ].flat(2)).toString(),
+        'font-src': new CSPObj(false, [], false, true, []).toString(),
+        'media-src': new CSPObj(false, [], false, true, []).toString(),
+        'child-src': new CSPObj(false, [], false, true, ['blob:']).toString(),
+        'worker-src': new CSPObj(false, [], false, true, ['blob:']).toString(),
+        'object-src': new CSPObj(true, [], false, false, []).toString(),
+        'default-src': new CSPObj(false, [], false, true, []).toString(),
+        'connect-src': new CSPObj(false, [], false, true, []).toString(),
+        'form-action': new CSPObj(false, [], false, true, []).toString(),
+        'prefetch-src': new CSPObj(false, [], false, true, []).toString(),
+        'manifest-src': new CSPObj(false, [], true, false, []).toString(),
+        'style-src': new CSPObj(false, ['unsafe-inline'], false, true, []).toString(),
+        'base-uri': new CSPObj(false, [], true, false, ['benshawmean.com']).toString(),
+        'script-src': new CSPObj(false, ['unsafe-inline', 'unsafe-eval'], true, false,
+          [
+            'blob:',
+            [
+              'benshawmean.com', 'google.com',
+              'fontawesome.com', 'jsdelivr.net',
+              'preline.co', 'accounts.dev',
+              'vercel-scripts.com', 'clerk.dev',
+              'cloudflare.com', 'cloudflareinsights.com',
+              'thefemdevs.com', 'localhost',
+            ].map(CD),
+          ].flat(2),
+        ).toString(),
+      },
+      permissionsPolicy: {
+        'hid': new PermissionPolicy({ none: true }).toString(),
+        'usb': new PermissionPolicy({ none: true }).toString(),
+        'midi': new PermissionPolicy({ none: true }).toString(),
+        'camera': new PermissionPolicy({ none: true }).toString(),
+        'serial': new PermissionPolicy({ none: true }).toString(),
+        'battery': new PermissionPolicy({ none: true }).toString(),
+        'gamepad': new PermissionPolicy({ none: true }).toString(),
+        'payment': new PermissionPolicy({ none: true }).toString(),
+        'autoplay': new PermissionPolicy({ none: true }).toString(),
+        'web-share': new PermissionPolicy({ self: true }).toString(),
+        'bluetooth': new PermissionPolicy({ none: true }).toString(),
+        'gyroscope': new PermissionPolicy({ none: true }).toString(),
+        'fullscreen': new PermissionPolicy({ self: true }).toString(),
+        'microphone': new PermissionPolicy({ none: true }).toString(),
+        'geolocation': new PermissionPolicy({ none: true }).toString(),
+        'magnetometer': new PermissionPolicy({ none: true }).toString(),
+        'accelerometer': new PermissionPolicy({ none: true }).toString(),
+        'idle-detection': new PermissionPolicy({ none: true }).toString(),
+        'storage-access': new PermissionPolicy({ none: true }).toString(),
+        'otp-credentials': new PermissionPolicy({ none: true }).toString(),
+        'browsing-topics': new PermissionPolicy({ none: true }).toString(),
+        'local-fonts': new PermissionPolicy({ wildcard: true }).toString(),
+        'screen-wake-lock': new PermissionPolicy({ none: true }).toString(),
+        'display-capture': new PermissionPolicy({ none: true }).toString(),
+        'document-domain': new PermissionPolicy({ none: true }).toString(),
+        'encrypted-media': new PermissionPolicy({ none: true }).toString(),
+        'speaker-selection': new PermissionPolicy({ none: true }).toString(),
+        'window-management': new PermissionPolicy({ none: true }).toString(),
+        'xr-spatial-tracking': new PermissionPolicy({ none: true }).toString(),
+        'ambient-light-sensor': new PermissionPolicy({ none: true }).toString(),
+        'picture-in-picture': new PermissionPolicy({ wildcard: true }).toString(),
+        'identity-credentials-get': new PermissionPolicy({ self: true }).toString(),
+        'publickey-credentials-get': new PermissionPolicy({ self: true }).toString(),
+        'execution-while-not-rendered': new PermissionPolicy({ none: true }).toString(),
+        'publickey-credentials-create': new PermissionPolicy({ self: true }).toString(),
+        'execution-while-out-of-viewport': new PermissionPolicy({ none: true }).toString(),
+      },
+      strictTransportSecurity: {
+        includeSubdomains: true,
+        preload: true,
+        maxAge: 31536e3,
+      },
+      crossOriginEmbedderPolicy: 'unsafe-none',
+      crossOriginResourcePolicy: 'cross-origin',
+      crossOriginOpenerPolicy: 'same-origin',
+      xContentTypeOptions: 'nosniff',
+      xDNSPrefetchControl: 'off',
+      xDownloadOptions: 'noopen',
+      xFrameOptions: 'DENY',
+      xPermittedCrossDomainPolicies: 'none',
+      xXSSProtection: '1; mode=block',
+      referrerPolicy: 'strict-origin'
+    },
+    csrf: {
+      enabled: true,
+      cookie: {
+        secure: true,
+        sameSite: 'strict',
+        httpOnly: true,
+      },
+    },
+    hidePoweredBy: true,
+    rateLimiter: {
+      interval: 60,
+      tokensPerInterval: 300,
+      throwError: true,
+    },
   },
 })
