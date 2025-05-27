@@ -22,7 +22,7 @@ const links: Link[] = [
         icon: 'mdi:code',
     },
     {
-        name: 'Social Media',
+        name: 'Socials',
         url: '/social',
         icon: 'mdi:internet',
     },
@@ -31,14 +31,19 @@ const links: Link[] = [
         url: '/contact',
         icon: 'mdi:email',
     },
+    {
+        name: 'Friends',
+        url: '/friends',
+        icon: 'mdi:account-multiple',
+    },
 ];
 
 const isMobile = ref(false);
 
 onMounted(() => {
-    isMobile.value = window.innerWidth <= 768;
+    isMobile.value = window.innerWidth <= 1024;
     window.addEventListener('resize', () => {
-        isMobile.value = window.innerWidth <= 768;
+        isMobile.value = window.innerWidth <= 1024;
     });
 });
 </script>
@@ -55,7 +60,7 @@ onMounted(() => {
         >
             <span class="flex flex-col place-items-center gap-1">
                 <Icon :name="link.icon" size="24px" v-if="isMobile" />
-            <span class="hidden md:inline">{{ link.name }}</span>
+            <span class="hidden lg:inline">{{ link.name }}</span>
             </span>
         </a>
     </nav>

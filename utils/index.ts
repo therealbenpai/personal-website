@@ -26,8 +26,15 @@ export const { format: formatTime } = new Intl.DateTimeFormat('en-US', {
     timeZoneName: "short",
 })
 
-export const {format: formatCurrency} = new Intl.NumberFormat('en-US', {
+export const { format: formatCurrency } = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'USD',
 })
 
+export const formatListAnd = new Intl.ListFormat('en-US', {
+    type: 'conjunction',
+})
+
+export const { format: formatListOr } = new Intl.ListFormat('en-US', {
+    type: 'disjunction',
+})

@@ -1,20 +1,20 @@
 <script setup lang="ts">
 useHead({
-    title: 'About Me',
+    title: 'Friends',
 });
 
 useSeoMeta({
-    description: 'A little bit about me.',
-    ogTitle: 'About Me',
-    ogDescription: 'A little bit about me.',
-    ogUrl: 'https://benshawmean.com/',
+    description: 'A list of all my friends (current and former).',
+    ogTitle: 'Friends',
+    ogDescription: 'A list of all my friends (current and former).',
+    ogUrl: 'https://benshawmean.com/friends',
     ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
     ogImageAlt: 'Profile Picture',
     ogType: 'website',
     ogSiteName: "Benpai's Website",
     twitterCard: 'summary_large_image',
-    twitterTitle: 'About Me',
-    twitterDescription: 'A little bit about me.',
+    twitterTitle: 'Friends',
+    twitterDescription: 'A list of all my friends (current and former).',
     twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
     twitterImageAlt: 'Profile Picture',
     twitterSite: '@therealbenpai',
@@ -24,7 +24,7 @@ useSeoMeta({
 
 <template>
     <div class="flex flex-col mt-8 p-4 gap-4 overflow-y-auto">
-        <h1 class="text-4xl font-bold">About Me</h1>
+        <h1 class="text-4xl font-bold"></h1>
         <p class="text-lg">
             Hello! My name is Ben! I am a full stack developer who works on many
             applications. I am the owner of The FemDevs, a community of
