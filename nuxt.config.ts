@@ -69,6 +69,12 @@ class PermissionPolicy {
 
 export default defineNuxtConfig({
   $production: {
+    content: {
+      database: {
+        type: 'd1',
+        bindingName: 'main',
+      },
+    },
     routeRules: {
       '/**': { isr: true },
       '/api/**': {
@@ -81,12 +87,6 @@ export default defineNuxtConfig({
         isr: false,
         ssr: true,
       }
-    },
-    content: {
-      database: {
-        type: 'd1',
-        bindingName: 'main',
-      },
     }
   },
   $development: {},
@@ -184,6 +184,11 @@ export default defineNuxtConfig({
     typeCheck: "build",
   },
   vite: {
+    build: {
+      rollupOptions: {
+        external: ['unenv/runtime/mock/noop']
+      }
+    },
     server: {
       fs: {
         strict: true,
@@ -298,4 +303,12 @@ export default defineNuxtConfig({
     },
     hidePoweredBy: true,
   },
+  nitro: {
+    rollupConfig: {
+      external(source, importer, isResolved) {
+          
+      },
+    },
+    preset: 'cloudflare-pages',
+  }
 })

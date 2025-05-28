@@ -21,6 +21,11 @@ useSeoMeta({
     twitterCreator: '@therealbenpai',
 });
 
+interface CustomTags {
+    text: string;
+    color: string;
+    icon: string;
+}
 
 interface Friend {
     name: string;
@@ -29,9 +34,28 @@ interface Friend {
     endDate?: Date;
     aliases?: Array<string>;
     status: 'current' | 'former';
+    customTags?: Array<CustomTags>;
 }
 
 const friends: Friend[] = [
+    {
+        name: 'Harley',
+        description: [
+            'Harley, who I more commonly refer to as Kayla, is currently my bestest friend and my girlfriend.',
+            'She is the most beautiful and amazing and bestest person in the whole entire world. No one can',
+            'compete.'
+        ].join(' '),
+        startDate: new Date('04/10/2025'),
+        aliases: ['Vixen', 'Kayla'],
+        status: 'current',
+        customTags: [
+            {
+                icon: 'game-icons:queen-crown',
+                color: 'bg-pink-700',
+                text: 'Girlfriend'
+            }
+        ]
+    },
     {
         name: 'Toasty',
         description: [
@@ -334,6 +358,19 @@ const friends: Friend[] = [
                                     class="translate-y-0.5"
                                 />
                             {{ friend.status }}
+                        </span>
+                        <span
+                            :class="{[tag.color]: true}"
+                            class="text-md px-4 py-1 rounded-2xl"
+                            v-if="friend.customTags && friend.customTags.length > 0"
+                            v-for="tag in friend.customTags"
+                        >
+                            <Icon
+                                :name="tag.icon"
+                                size="16px"
+                                class="translate-y-0.5"
+                            />
+                            {{ tag.text }}
                         </span>
                     </div>
                 </div>
