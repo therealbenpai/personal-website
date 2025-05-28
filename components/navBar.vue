@@ -41,9 +41,9 @@ const links: Link[] = [
 const isMobile = ref(false);
 
 onMounted(() => {
-    isMobile.value = window.innerWidth <= 1024;
+    isMobile.value = window.innerWidth < 1024;
     window.addEventListener('resize', () => {
-        isMobile.value = window.innerWidth <= 1024;
+        isMobile.value = window.innerWidth < 1024;
     });
 });
 </script>

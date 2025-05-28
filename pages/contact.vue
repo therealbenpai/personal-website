@@ -37,7 +37,7 @@ const contactMethods: ContactMethod[] = [
     },
     {
         name: 'Discord',
-        identifier: '@therealbenpai',
+        identifier: '@benshawmean',
         link: 'https://discord.com/users/1158220643616182445',
         icon: 'fa-brands:discord',
     },

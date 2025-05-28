@@ -31,7 +31,7 @@ interface SocialMediaAccount {
 
 const socialMediaAccounts: SocialMediaAccount[] = [
     {
-        username: 'benpai',
+        username: 'benshawmean',
         identifier: '1158220643616182445',
         link: 'https://discord.com/users/1158220643616182445',
         platform: 'Discord',

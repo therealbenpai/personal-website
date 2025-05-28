@@ -41,20 +41,21 @@ const friends: Friend[] = [
     {
         name: 'Harley',
         description: [
-            'Harley, who I more commonly refer to as Kayla, is currently my bestest friend and my girlfriend.',
+            'Harley, who I more commonly refer to as Kayla, is currently my bestest friend.',
+            (Date.now() >= (new Date("01/01/2027")).valueOf() ? 'She is also my girlfriend.' : null),
             'She is the most beautiful and amazing and bestest person in the whole entire world. No one can',
             'compete.'
         ].join(' '),
         startDate: new Date('04/10/2025'),
         aliases: ['Vixen', 'Kayla'],
         status: 'current',
-        customTags: [
+        customTags: Date.now() >= (new Date("01/01/2027")).valueOf() ? [
             {
                 icon: 'game-icons:queen-crown',
                 color: 'bg-pink-700',
                 text: 'Girlfriend'
             }
-        ]
+        ] : []
     },
     {
         name: 'Toasty',

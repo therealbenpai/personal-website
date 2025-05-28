@@ -1,20 +1,20 @@
 <script setup lang="ts">
 useHead({
-    title: 'Friends',
+    title: 'Homepage',
 });
 
 useSeoMeta({
-    description: 'A list of all my friends (current and former).',
+    description: 'About me',
     ogTitle: 'Friends',
-    ogDescription: 'A list of all my friends (current and former).',
-    ogUrl: 'https://benshawmean.com/friends',
+    ogDescription: 'About me',
+    ogUrl: 'https://benshawmean.com/',
     ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
     ogImageAlt: 'Profile Picture',
     ogType: 'website',
     ogSiteName: "Benpai's Website",
     twitterCard: 'summary_large_image',
-    twitterTitle: 'Friends',
-    twitterDescription: 'A list of all my friends (current and former).',
+    twitterTitle: 'Homepage',
+    twitterDescription: 'About me',
     twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
     twitterImageAlt: 'Profile Picture',
     twitterSite: '@therealbenpai',
