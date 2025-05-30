@@ -233,9 +233,9 @@ const friends: Friend[] = [
             'I enjoyed spending time with her as she was a great person.',
         ].join(' '),
         startDate: new Date('02/16/2025'),
-        // endDate: new Date('05/11/2025'),
+        endDate: new Date('05/11/2025'),
         aliases: ['Lani', 'Lannah', 'Nanners'],
-        status: 'current',
+        status: 'former',
     },
     {
         name: 'Roxan', 
