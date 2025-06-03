@@ -340,7 +340,7 @@ const friends: Friend[] = [
                     </h2>
                     <p class="text-md text-stone-300" v-if="friend.description">
                         <span class="text-2xl font-extrabold">" </span>
-                        <span class="italic underline">{{ friend.description }}</span>
+                        <span class="italic underline text-justify">{{ friend.description }}</span>
                         <span class="text-2xl font-extrabold"> "</span>
                     </p>
                     <p class="text-md text-stone-500">
@@ -359,7 +359,7 @@ const friends: Friend[] = [
                                 'bg-gray-500':
                                     friend.status === 'former',
                             }"
-                            class="text-md px-4 py-1 rounded-2xl"
+                            class="text-md px-4 py-1 rounded-2xl text-center items-center"
                             >
                                 <Icon
                                     :name="(() =>
@@ -374,7 +374,7 @@ const friends: Friend[] = [
                         </span>
                         <span
                             :class="{[tag.color]: true}"
-                            class="text-md px-4 py-1 rounded-2xl"
+                            class="text-md px-4 py-1 rounded-2xl text-center items-center"
                             v-if="friend.customTags && friend.customTags.length > 0"
                             v-for="tag in friend.customTags"
                         >
