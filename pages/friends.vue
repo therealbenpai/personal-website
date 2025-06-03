@@ -46,6 +46,13 @@ const friends: Friend[] = [
         startDate: new Date('04/10/2025'),
         aliases: ['Vixen', 'Kayla'],
         status: 'current',
+        customTags: [
+            {
+                text: 'Girlfriend <33',
+                color: 'bg-pink-400',
+                icon: 'memory:ring'
+            }
+        ]
     },
     {
         name: 'Isa', 
