@@ -42,6 +42,19 @@ const friends: Friend[] = [
         name: 'Harley',
         description: [
             'Harley, who I more commonly refer to as Kayla, is currently my bestest friend.',
+            'Even though we have had our fair share of drama, nothing can separate us.',
+            'I will always be there for you and I know you will conversely always be there for me.',
+            'You are undebatably the most kind, compassionate, loving, sweet, beautiful, cute, amazing,',
+            'greatest person I have met in a long time; hell, maybe ever. I doubt you can even slightly',
+            'fathom the true extent of my love for you, as some days, not even I can. It just seems to',
+            'extend on for ever and ever. I love being able to talk with you on the daily basis and just',
+            'being able to hear your voice and see you on call is more than enough to quell any sort of',
+            'stress or sadness I am experiencing that day. I just can\'t imagine my life without you in it.',
+            'I can\'t even put it into words how absolutely grateful I am to have you in my life next to me',
+            'wherever in life I go. I long for the day that we have the opportunity to met up in person',
+            'and actually see each other face to face. That day will officially become the greatest day in',
+            'my life, and that is saying something as believe it or not, I have had some amazing days.',
+            'Thank you for being there when few others were willing to. I love you my sweet lady <3.'
         ].join(' '),
         startDate: new Date('04/10/2025'),
         aliases: ['Vixen', 'Kayla'],
@@ -57,7 +70,7 @@ const friends: Friend[] = [
     {
         name: 'Isa', 
         description: [
-            'Isa, who I met through Oli, is a great friend of mine. She is a chill and kind',
+            'Isa, who I met through Oli, was a great friend of mine. She is a chill and kind',
             'person, and is currently one of my closest friends I have. She helped me through',
             'so many things involving my mental health and issues with my ex. We seem to not',
             'talk as much anymore, but I still consider her a great friend.',
@@ -70,7 +83,7 @@ const friends: Friend[] = [
     {
         name: 'Chrisi', 
         description: [
-            'Chrisi, similar to Isa, is a great friend of mine. She is a chill and kind',
+            'Chrisi, similar to Isa, was a great friend of mine. She is a chill and kind',
             'person, and is currently one of my closest friends I have. She helped me through',
             'so many things involving my mental health and issues with my ex. We seem to not',
             'talk as much anymore, but I still consider her a great friend.',
