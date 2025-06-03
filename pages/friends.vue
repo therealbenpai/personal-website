@@ -56,8 +56,9 @@ const friends: Friend[] = [
             'talk as much anymore, but I still consider her a great friend.',
         ].join(' '),
         startDate: new Date('10/01/2024'),
+        endDate: new Date('06/02/2025'),
         aliases: [],
-        status: 'current',
+        status: 'former',
     },
     {
         name: 'Chrisi', 
@@ -68,8 +69,9 @@ const friends: Friend[] = [
             'talk as much anymore, but I still consider her a great friend.',
         ].join(' '),
         startDate: new Date('04/01/2025'),
+        endDate: new Date('06/02/2025'),
         aliases: [],
-        status: 'current',
+        status: 'former',
     },
     {
         name: 'Makii', 
