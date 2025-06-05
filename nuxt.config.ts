@@ -68,6 +68,11 @@ class PermissionPolicy {
 }
 
 export default defineNuxtConfig({
+  $production: {
+    routeRules: {
+      '/**': { isr: false },
+    }
+  },
   $development: {
     devtools: {
       enabled: true,
