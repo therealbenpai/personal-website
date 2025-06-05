@@ -79,7 +79,17 @@ export default defineNuxtConfig({
       },
     }
   },
-  $development: {},
+  $development: {
+    devtools: {
+      enabled: true,
+      vscode: {
+        enabled: true,
+        host: 'localhost',
+        port: 9229,
+      },
+      telemetry: true,
+    },
+  },
   $env: { staging: {} },
   app: {
     head: {
@@ -95,15 +105,6 @@ export default defineNuxtConfig({
   },
   compatibilityDate: {
     default: '2024-11-01',
-  },
-  devtools: {
-    enabled: true,
-    vscode: {
-      enabled: true,
-      host: 'localhost',
-      port: 9229,
-    },
-    telemetry: true,
   },
   experimental: {
     appManifest: true,
