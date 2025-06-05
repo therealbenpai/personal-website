@@ -69,12 +69,6 @@ class PermissionPolicy {
 
 export default defineNuxtConfig({
   $production: {
-    content: {
-      database: {
-        type: 'd1',
-        bindingName: 'main',
-      },
-    },
     routeRules: {
       '/**': { isr: true },
       '/api/**': {
@@ -83,10 +77,6 @@ export default defineNuxtConfig({
           'Cache-Control': 'no-cache'
         }
       },
-      '/blog/**': {
-        isr: false,
-        ssr: true,
-      }
     }
   },
   $development: {},
@@ -105,25 +95,6 @@ export default defineNuxtConfig({
   },
   compatibilityDate: {
     default: '2024-11-01',
-  },
-  content: {
-    preview: {
-      api: 'https://api.nuxt.studio',
-      dev: true
-    },
-    renderer: {
-      anchorLinks: true,
-    },
-    watch: {
-      enabled: true,
-    },
-    build: {
-      markdown: {
-        highlight: {
-          theme: 'github-dark',
-        }
-      }
-    }
   },
   devtools: {
     enabled: true,
@@ -157,7 +128,6 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/scripts',
     '@nuxt/icon',
-    '@nuxt/content',
     '@nuxtjs/turnstile',
     'nuxt-security'
   ],

@@ -12,11 +12,6 @@ const links: Link[] = [
         icon: 'mdi:home',
     },
     {
-        name: 'Blog',
-        url: '/blog',
-        icon: 'mdi:fountain-pen-tip',
-    },
-    {
         name: 'Projects',
         url: '/projects',
         icon: 'mdi:code',
