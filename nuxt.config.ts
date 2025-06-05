@@ -70,7 +70,7 @@ class PermissionPolicy {
 export default defineNuxtConfig({
   $production: {
     routeRules: {
-      '/**': { isr: false },
+      '/**': { swr: true },
     }
   },
   $development: {
