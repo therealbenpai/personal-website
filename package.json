@@ -18,6 +18,7 @@
     "@nuxtjs/mdc": "0.13.2",
     "@nuxtjs/tailwindcss": "6.13.1",
     "@nuxtjs/turnstile": "0.9.11",
+    "@supabase/supabase-js": "^2.49.9",
     "data-uri-to-buffer": "^6.0.2",
     "lodash": "^4.17.21",
     "mime-types": "^2.1.35",
@@ -41,5 +42,5 @@
     "node": ">=22",
     "npm": ">=8"
   },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
+  "packageManager": "pnpm@10.11.1"
 }

@@ -169,6 +169,11 @@ export default defineNuxtConfig({
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
       },
     },
+    supabase: {
+      url: process.env.SUPABASE_URL,
+      key: process.env.SUPABASE_KEY,
+      serviceKey: process.env.SUPABASE_SERVICE_KEY,
+    },
   },
   tailwindcss: {
     exposeConfig: true,
@@ -304,11 +309,6 @@ export default defineNuxtConfig({
     hidePoweredBy: true,
   },
   nitro: {
-    rollupConfig: {
-      external(source, importer, isResolved) {
-          
-      },
-    },
     preset: 'cloudflare-pages',
-  }
+  },
 })

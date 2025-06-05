@@ -38,3 +38,8 @@ export const formatListAnd = new Intl.ListFormat('en-US', {
 export const { format: formatListOr } = new Intl.ListFormat('en-US', {
     type: 'disjunction',
 })
+
+export const processTime = (timeString: string): string => {
+    const fTimeString = `${timeString}`;
+    return formatDate(new Date(fTimeString));
+}
