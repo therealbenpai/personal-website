@@ -71,12 +71,6 @@ export default defineNuxtConfig({
   $production: {
     routeRules: {
       '/**': { isr: true },
-      '/api/**': {
-        isr: false,
-        headers: {
-          'Cache-Control': 'no-cache'
-        }
-      },
     }
   },
   $development: {
@@ -129,17 +123,10 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/scripts',
     '@nuxt/icon',
-    '@nuxtjs/turnstile',
     'nuxt-security'
   ],
   routeRules: {},
   runtimeConfig: {
-    cloudflare: {
-      auth: {
-        accessKeyId: process.env.R2_ACCESS_KEY_ID,
-        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
-      },
-    },
     supabase: {
       url: process.env.SUPABASE_URL,
       key: process.env.SUPABASE_KEY,
@@ -150,11 +137,6 @@ export default defineNuxtConfig({
     exposeConfig: true,
     viewer: { endpoint: '/_tailwind', exportViewer: true },
     config: TailwindsConfig as any
-  },
-  turnstile: {
-    siteKey: process.env.TURNSTILE_SITE_KEY,
-    secretKey: process.env.TURNSTILE_SECRET_KEY,
-    addValidateEndpoint: true,
   },
   typescript: {
     typeCheck: "build",
@@ -281,5 +263,5 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'cloudflare-pages',
-  },
+  }
 })
