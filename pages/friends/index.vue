@@ -22,6 +22,8 @@ useSeoMeta({
 });
 
 const { data: friends } = await useFetch(`/api/friend/getAll`);
+
+console.log(friends)
 </script>
 
 <template>
