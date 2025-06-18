@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { buildSQLQuery } from "~/utils";
 
 interface CustomTag {
     text: string;
@@ -21,14 +21,7 @@ interface Friend {
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
     const name = getRouterParam(event, 'name');
-    const supabase = createClient(runtimeConfig.supabase.url, runtimeConfig.supabase.key);
-    const response = await supabase
-        .from('bensfriends')
-        .select('*')
-        .eq('name', name)
-        .limit(1)
-        .single()
-    const data = response.data as Friend;
+    const data = (await buildSQLQuery<Friend>(runtimeConfig, 'bensfriends', { order: 'id.asc', name: `eq.${name}`, limit: '1' }))[0]
     if (data) {
         const imgData = data.image.split(':');
         switch (imgData[0]) {
@@ -39,5 +32,5 @@ export default defineEventHandler(async (event) => {
                 data.image = `https://ted.ac/api/discord/user/${imgData[1]}/avatar`
         }
     }
-    return data as Friend;
+    return data;
 })

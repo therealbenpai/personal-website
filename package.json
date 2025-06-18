@@ -13,22 +13,18 @@
     "@nuxt/fonts": "0.10.3",
     "@nuxt/scripts": "0.9.5",
     "@nuxtjs/tailwindcss": "6.13.1",
-    "@supabase/supabase-js": "^2.49.9",
-    "data-uri-to-buffer": "^6.0.2",
-    "mime-types": "^2.1.35",
-    "nuxt": "^3.17.4",
+    "nuxt": "^3.17.5",
     "nuxt-security": "2.1.5",
-    "pg": "^8.16.0",
     "unenv": "^1.10.0",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@nuxt/devtools": "^2.5.0",
     "@nuxt/eslint": "^0.7.6",
     "@nuxt/icon": "^1.13.0",
-    "@nuxtjs/i18n": "^9.5.4",
-    "@types/lodash": "^4.17.17",
-    "@types/mime-types": "^2.1.4",
+    "@nuxtjs/i18n": "^9.5.5",
+    "@types/lodash": "^4.17.18",
     "typescript": "^5.8.3",
     "vue-tsc": "^2.2.10"
   },
@@ -36,5 +32,5 @@
     "node": ">=22",
     "npm": ">=8"
   },
-  "packageManager": "pnpm@10.11.1"
+  "packageManager": "pnpm@10.12.1"
 }

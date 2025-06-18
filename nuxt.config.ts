@@ -76,6 +76,7 @@ export default defineNuxtConfig({
       },
       telemetry: true,
     },
+    debug: true
   },
   $env: { staging: {} },
   app: {
@@ -110,6 +111,7 @@ export default defineNuxtConfig({
     defaultLocale: 'en-US',
   },
   modules: [
+    '@nuxt/devtools',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxt/eslint',

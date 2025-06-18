@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { buildSQLQuery } from "~/utils";
 
 interface CustomTag {
     text: string;
@@ -19,10 +19,5 @@ interface Friend {
 
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    const supabase = createClient(runtimeConfig.supabase.url, runtimeConfig.supabase.key);
-    const { data, error } = await supabase
-        .from('bensfriends')
-        .select('*')
-        .order('id', { ascending: true });
-    return data as Friend[];
+    return await buildSQLQuery<Friend>(runtimeConfig, 'bensfriends', { order: 'id.asc' })
 })

@@ -1,3 +1,5 @@
+import type { RuntimeConfig } from "nuxt/schema"
+
 export const { format: formatFullDateTime } = new Intl.DateTimeFormat('en-US', {
     year: "numeric",
     month: "long",
@@ -42,4 +44,15 @@ export const { format: formatListOr } = new Intl.ListFormat('en-US', {
 export const processTime = (timeString: string): string => {
     const fTimeString = `${timeString}`;
     return formatDate(new Date(fTimeString));
+}
+
+export const buildSQLQuery = async <type> (
+    rtc: RuntimeConfig,
+    table: string,
+    attr: Record<string, string> = {}
+): Promise<type[]> => {
+    const search = new URLSearchParams(attr)
+    const url = new URL(`/rest/v1/${table}`, rtc.supabase.url)
+    url.search = search.toString()
+    return fetch(url, { headers: { apikey: rtc.supabase.key } }).then(res => res.json()) as Promise<type[]>;
 }
