@@ -95,9 +95,7 @@ const socialMediaAccounts: SocialMediaAccount[] = [
                 <a :href="account.link">
                     <div class="flex flex-col gap-2">
                         <div class="flex flex-row gap-6">
-                            <h2 class="text-2xl font-semibold">
-                                {{ account.platform }}
-                            </h2>
+                            <h2 class="text-2xl font-semibold">{{ account.platform }}</h2>
                             <Icon :name="account.icon" size="24px" />
                         </div>
                         <p class="text-lg">{{ account.username }}</p>

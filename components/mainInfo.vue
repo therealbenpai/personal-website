@@ -7,8 +7,7 @@
         />
         <div class="flex flex-col gap-2">
             <h2 class="text-3xl font-bold">
-                Ben
-                <span class="text-gray-400 text-sm">(he/them)</span>
+                Ben <span class="text-gray-400 text-sm">(he/them)</span>
             </h2>
             <h3 class="text-lg text-gray-400">Full Stack Web Developer</h3>
         </div>

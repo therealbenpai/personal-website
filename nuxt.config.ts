@@ -3,8 +3,6 @@
 import { languages } from './configs/languages';
 import TailwindsConfig from './configs/tailwinds.config';
 
-const caab = (v: any) => Array.isArray(v) && v;
-
 const CD = (domain: string) => Array.of(domain, `*.${domain} `);
 
 class CSPObj {
@@ -29,10 +27,10 @@ class CSPObj {
   parse() {
     if (this.none) return `'none'`;
     return [
-      caab(this.directives) ? this.directives.map(v => `'${v}'`) : [],
+      Array.isArray(this.directives) && this.directives ? this.directives.map(v => `'${v}'`) : [],
       this.wildcard ? '*' : '',
       this.self ? "'self'" : '',
-      caab(this.domains) ? this.domains : [],
+      Array.isArray(this.domains) && this.domains ? this.domains : [],
     ].flat(2);
   }
 }
@@ -62,17 +60,12 @@ class PermissionPolicy {
     return [
       this.src ? 'src' : '',
       this.self ? "self" : '',
-      caab(this.domains) ? this.domains : [],
+      Array.isArray(this.domains) && this.domains ? this.domains : [],
     ].flat(2);
   }
 }
 
 export default defineNuxtConfig({
-  $production: {
-    routeRules: {
-      '/**': { swr: true },
-    }
-  },
   $development: {
     devtools: {
       enabled: true,
@@ -125,7 +118,9 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     'nuxt-security'
   ],
-  routeRules: {},
+  routeRules: {
+    '/**': { isr: false },
+  },
   runtimeConfig: {
     supabase: {
       url: process.env.SUPABASE_URL,
@@ -173,8 +168,7 @@ export default defineNuxtConfig({
           [
             'benshawmean.com', 'google.com',
             'fontawesome.com', 'jsdelivr.net',
-            'preline.co', 'accounts.dev',
-            'vercel-scripts.com', 'clerk.dev',
+            'preline.co', 'accounts.dev', 'clerk.dev',
             'cloudflare.com', 'cloudflareinsights.com',
             'thefemdevs.com', 'localhost',
           ].map(CD),
@@ -197,8 +191,7 @@ export default defineNuxtConfig({
             [
               'benshawmean.com', 'google.com',
               'fontawesome.com', 'jsdelivr.net',
-              'preline.co', 'accounts.dev',
-              'vercel-scripts.com', 'clerk.dev',
+              'preline.co', 'accounts.dev', 'clerk.dev',
               'cloudflare.com', 'cloudflareinsights.com',
               'thefemdevs.com', 'localhost',
             ].map(CD),

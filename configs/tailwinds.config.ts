@@ -13,7 +13,7 @@ const config: ModuleOptions['config'] = {
         backgroundImage: {
           "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
           "gradient-conic":
-            "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         },
         fontFamily: {
           poppins: ['Poppins', 'sans-serif'],
@@ -68,7 +68,6 @@ const config: ModuleOptions['config'] = {
     },
     experimental: { matchVariant: true, optimizeUniversalDefaults: true },
     darkMode: 'media',
-  
 };
 
 export default config;
