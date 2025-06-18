@@ -24,7 +24,6 @@
     "@nuxt/eslint": "^0.7.6",
     "@nuxt/icon": "^1.13.0",
     "@nuxtjs/i18n": "^9.5.5",
-    "@types/lodash": "^4.17.18",
     "typescript": "^5.8.3",
     "vue-tsc": "^2.2.10"
   },
