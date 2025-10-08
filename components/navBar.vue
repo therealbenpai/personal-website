@@ -18,12 +18,12 @@ const links: Link[] = [
     },
     {
         name: 'Socials',
-        url: '/social',
+        url: '/socials',
         icon: 'mdi:internet',
     },
     {
         name: 'Contact',
-        url: '/contact',
+        url: '/contacts',
         icon: 'mdi:email',
     },
     {

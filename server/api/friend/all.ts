@@ -19,5 +19,5 @@ interface Friend {
 
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    return await buildSQLQuery<Friend>(runtimeConfig, 'bensfriends', { order: 'id.asc' })
+    return await buildSQLQuery<Friend>(runtimeConfig, 'friend', { order: 'id.asc' })
 })

@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config';
 
 import { languages } from './configs/languages';
 import TailwindsConfig from './configs/tailwinds.config';
@@ -76,7 +77,6 @@ export default defineNuxtConfig({
       },
       telemetry: true,
     },
-    debug: true
   },
   $env: { staging: {} },
   app: {
@@ -110,18 +110,28 @@ export default defineNuxtConfig({
     locales: languages,
     defaultLocale: 'en-US',
   },
+  icon: {
+    collections: [
+      'heroicons-solid',
+      'fa-solid',
+      'fa-brands',
+      'simple-icons',
+      'material-symbols',
+    ],
+  },
   modules: [
     '@nuxt/devtools',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
-    '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/scripts',
     '@nuxt/icon',
     'nuxt-security'
   ],
   routeRules: {
-    '/**': { isr: false },
+    '/**': {
+      isr: false,
+    },
   },
   runtimeConfig: {
     supabase: {
@@ -133,7 +143,7 @@ export default defineNuxtConfig({
   tailwindcss: {
     exposeConfig: true,
     viewer: { endpoint: '/_tailwind', exportViewer: true },
-    config: TailwindsConfig as any
+    config: TailwindsConfig
   },
   typescript: {
     typeCheck: "build",

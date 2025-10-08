@@ -21,9 +21,7 @@ useSeoMeta({
     twitterCreator: '@therealbenpai',
 });
 
-const { data: friends } = await useFetch(`/api/friend/getAll`);
-
-console.log(friends)
+const { data: friends } = await useFetch(`/api/friend/all`);
 </script>
 
 <template>

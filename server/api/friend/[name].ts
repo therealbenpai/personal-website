@@ -21,7 +21,7 @@ interface Friend {
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
     const name = getRouterParam(event, 'name');
-    const data = (await buildSQLQuery<Friend>(runtimeConfig, 'bensfriends', { order: 'id.asc', name: `eq.${name}`, limit: '1' }))[0]
+    const data = (await buildSQLQuery<Friend>(runtimeConfig, 'friend', { order: 'id.asc', name: `eq.${name}`, limit: '1' }))[0]
     if (data) {
         const imgData = data.image.split(':');
         switch (imgData[0]) {
