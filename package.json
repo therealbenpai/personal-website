@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "@nuxt/fonts": "0.10.3",
-    "@nuxt/scripts": "0.9.5",
+    "@nuxt/scripts": "0.12.1",
     "@nuxtjs/tailwindcss": "6.13.1",
-    "nuxt": "^3.17.5",
+    "nuxt": "^4.1.3",
     "nuxt-security": "2.1.5",
     "unenv": "^1.10.0",
     "vue": "latest",
