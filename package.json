@@ -28,6 +28,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@types/node": "latest",
     "@nuxt/devtools": "^2.5.0",
     "@nuxt/eslint": "^0.7.6",
     "@nuxt/icon": "^1.13.0",
