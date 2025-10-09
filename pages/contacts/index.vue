@@ -37,10 +37,10 @@ const { data: contacts } = await useFetch(`/api/contact/all`);
                 <a :href="method.link">
                     <div class="flex flex-col gap-2">
                         <div class="flex flex-row gap-6">
+                            <Icon :name="method.icon" size="24px" />
                             <h2 class="text-2xl font-semibold">
                                 {{ method.name }}
                             </h2>
-                            <Icon :name="method.icon" size="24px" />
                         </div>
                         <p class="text-lg">{{ method.identifier }}</p>
                     </div>

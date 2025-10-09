@@ -21,14 +21,6 @@ useSeoMeta({
     twitterCreator: '@therealbenpai',
 });
 
-const KeyMap = {
-    'in progress': 'heroicons-solid:clock',
-    beta: 'heroicons-solid:sparkles',
-    released: 'heroicons-solid:check-circle',
-    archived: 'heroicons-solid:archive',
-    dropped: 'heroicons-solid:x-circle',
-};
-
 const route = useRoute();
 const { project } = route.params;
 const { data: projectData } = await useFetch(`/api/project/${project}`);
@@ -62,35 +54,22 @@ const { data: projectData } = await useFetch(`/api/project/${project}`);
         <div class="flex flex-row gap-4 my-2">
             <div class="flex flex-row gap-4 my-2">
                 <span
-                    :class="{
-                        'bg-green-500': projectData.public,
-                        'bg-red-500': !projectData.public,
-                    }"
+                    :class="Mapper.getProjectPublicationColor(projectData.public)"
                     class="text-md px-4 py-1 rounded-2xl"
                 >
                     <Icon
-                        :name="
-                            projectData.public
-                                ? 'material-symbols:book-outline'
-                                : 'material-symbols:lock-outline'
-                        "
+                        :name="Mapper.getProjectPublicationIcon(projectData.public)"
                         size="16px"
                         class="translate-y-0.5"
                     />
-                    {{ `${projectData.public ? 'open' : 'closed'} source` }}
+                    {{ `${Mapper.processProjectStatus(projectData.public)} source` }}
                 </span>
                 <span
-                    :class="{
-                        'bg-green-500': projectData.status === 'released',
-                        'bg-yellow-500': projectData.status === 'beta',
-                        'bg-orange-500': projectData.status === 'in progress',
-                        'bg-red-500': projectData.status === 'archived',
-                        'bg-gray-500': projectData.status === 'dropped',
-                    }"
+                    :class="Mapper.getProjectStatusColor(projectData.status)"
                     class="text-md px-4 py-1 rounded-2xl"
                 >
                     <Icon
-                        :name="KeyMap[projectData.status]"
+                        :name="Mapper.getProjectStatusIcon(projectData.status)"
                         size="16px"
                         class="translate-y-0.5"
                     />

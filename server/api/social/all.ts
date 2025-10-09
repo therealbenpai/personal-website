@@ -1,14 +1,9 @@
-import { buildSQLQuery } from "~/utils";
-
-interface SocialMediaAccount {
-    username: string;
-    identifier: string;
-    link: string;
-    platform: string;
-    icon: string;
-}
+import {
+    buildSQLQuery,
+    type Types,
+} from "~/utils";
 
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    return await buildSQLQuery<SocialMediaAccount>(runtimeConfig, 'social', { order: 'id.asc' })
+    return await buildSQLQuery<Types.SocialMediaAccount>(runtimeConfig, 'social', { order: 'id.asc' })
 })

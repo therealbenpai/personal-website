@@ -5,6 +5,7 @@ definePageMeta({
 </script>
 
 <template>
+    <!-- This is used to force Tailwind to generate all the necessary classes, even when they are dynamically generated -->
     <h1>What are you doing here???? There is nothing to see here?</h1>
     <div class="hidden bg-red-50"></div>
     <div class="hidden bg-red-100"></div>

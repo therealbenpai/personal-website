@@ -1,5 +1,56 @@
 import type { RuntimeConfig } from "nuxt/schema"
 
+export namespace Types {
+    export type PublicationStatus = 'open' | 'closed';
+
+    export interface Project {
+        name: string;
+        description: string;
+        link: string;
+        public: boolean;
+        status: 'in progress' | 'beta' | 'released' | 'archived' | 'dropped';
+        long: string;
+    }
+
+    export interface SocialMediaAccount {
+        username: string;
+        identifier: string;
+        link: string;
+        platform: string;
+        icon: string;
+    }
+
+    export interface AboutSection {
+        header: string;
+        description: string;
+    }
+
+    export interface CustomTag {
+        text: string;
+        color: string;
+        icon: string;
+    }
+
+    export interface Friend {
+        id: number;
+        name: string;
+        description: string;
+        active: boolean;
+        start: string;
+        end: string | null;
+        aliases: string;
+        image: string | 'none';
+        custom_tags: CustomTag[];
+    }
+
+    export interface ContactMethod {
+        name: string;
+        identifier: string;
+        link: string;
+        icon: string;
+    }
+}
+
 export class Formatter {
     static dateTime(date: Date): string {
         return new Intl.DateTimeFormat('en-US', {
@@ -54,13 +105,45 @@ export class Formatter {
     }
 }
 
-export const KeyMap = {
-    'in progress': 'heroicons-solid:clock',
-    beta: 'heroicons-solid:sparkles',
-    released: 'heroicons-solid:check-circle',
-    archived: 'heroicons-solid:archive',
-    dropped: 'heroicons-solid:x-circle',
-};
+export class Mapper {
+    static PSIM = {
+        'in progress': 'clock',
+        beta: 'sparkles',
+        released: 'check-circle',
+        archived: 'archive',
+        dropped: 'x-circle',
+    } as Record<string, string>;
+    static PSC = {
+        released: 'green',
+        beta: 'yellow',
+        'in progress': 'orange',
+        archived: 'red',
+        dropped: 'gray',
+    } as Record<string, string>;
+    static PPI = {
+        open: 'book',
+        closed: 'lock',
+    } as Record<string, string>;
+    static PPC = {
+        open: 'blue',
+        closed: 'gray',
+    } as Record<string, string>;
+    static getProjectStatusIcon(status: string): string {
+        return `heroicons-solid:${Mapper.PSIM[status] || 'question-mark-circle'}`;
+    }
+    static getProjectStatusColor(status: string): string {
+        return `bg-${Mapper.PSC[status] || 'gray'}-500`;
+    }
+    static processProjectStatus(status: boolean): Types.PublicationStatus {
+        return status ? 'open' : 'closed';
+    }
+    static getProjectPublicationIcon(publication: boolean): string {
+        return `material-symbols:${Mapper.PPI[this.processProjectStatus(publication) || 'help']}-outline`;
+    }
+    static getProjectPublicationColor(publication: boolean): string {
+        return `bg-${Mapper.PPC[this.processProjectStatus(publication) || 'help']}-500`;
+    }
+}
 
 export const buildSQLQuery = async <type>(
     rtc: RuntimeConfig,

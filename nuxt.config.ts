@@ -60,7 +60,7 @@ class PermissionPolicy {
     if (this.wildcard) return '*';
     return [
       this.src ? 'src' : '',
-      this.self ? "self" : '',
+      this.self ? 'self' : '',
       Array.isArray(this.domains) && this.domains ? this.domains : [],
     ].flat(2);
   }
