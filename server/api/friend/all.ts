@@ -1,9 +1,5 @@
-import {
-    buildSQLQuery,
-    type Types,
-} from "~/utils";
-
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    return await buildSQLQuery<Types.Friend>(runtimeConfig, 'friend', { order: 'id.asc' })
+    const query = new QueryHelper().orderBy('id');
+    return (await Database.query<Friend>(runtimeConfig, 'friend', query)).all
 })

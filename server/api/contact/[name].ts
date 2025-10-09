@@ -1,11 +1,9 @@
-import {
-    buildSQLQuery,
-    type Types,
-} from "~/utils";
-
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
     const name = getRouterParam(event, 'name');
-    const data = (await buildSQLQuery<Types.ContactMethod>(runtimeConfig, 'contact', { order: 'id.asc', name: `eq.${name}`, limit: '1' }))[0]
-    return data;
+    const query = new QueryHelper()
+        .equal('name', name!)
+        .orderBy('id')
+        .addLimit(1);
+    return (await Database.query<ContactMethod>(runtimeConfig, 'contact', query)).first;
 })

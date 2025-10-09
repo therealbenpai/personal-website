@@ -1,9 +1,5 @@
-import {
-    buildSQLQuery,
-    type Types,
-} from "~/utils";
-
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    return await buildSQLQuery<Types.Project>(runtimeConfig, 'project', { order: 'id.asc' })
+    const query = new QueryHelper().orderBy('id');
+    return (await Database.query<Project>(runtimeConfig, 'project', query)).all;
 })

@@ -1,70 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from 'nuxt/config';
 
-import { languages } from './configs/languages';
+import { languages } from './i18n/languages';
 import TailwindsConfig from './configs/tailwinds.config';
-
-const CD = (domain: string) => Array.of(domain, `*.${domain} `);
-
-class CSPObj {
-  none: boolean;
-  directives: string[];
-  self: boolean;
-  wildcard: boolean;
-  domains: string[];
-  constructor(
-    none: boolean,
-    directives: string[],
-    self: boolean,
-    wildcard: boolean,
-    domains: string[]
-  ) {
-    this.none = none;
-    this.directives = directives;
-    this.self = self;
-    this.wildcard = wildcard;
-    this.domains = domains;
-  }
-  parse() {
-    if (this.none) return `'none'`;
-    return [
-      Array.isArray(this.directives) && this.directives ? this.directives.map(v => `'${v}'`) : [],
-      this.wildcard ? '*' : '',
-      this.self ? "'self'" : '',
-      Array.isArray(this.domains) && this.domains ? this.domains : [],
-    ].flat(2);
-  }
-}
-
-class PermissionPolicy {
-  none: boolean;
-  self: boolean;
-  wildcard: boolean;
-  src: boolean;
-  domains: string[];
-  constructor(data: {
-    none?: boolean,
-    self?: boolean,
-    wildcard?: boolean,
-    src?: boolean,
-    domains?: string[]
-  }) {
-    this.none = data.none ?? false;
-    this.self = data.self ?? false;
-    this.wildcard = data.wildcard ?? false;
-    this.src = data.src ?? false;
-    this.domains = data.domains ?? [];
-  }
-  parse() {
-    if (this.none) return '()';
-    if (this.wildcard) return '*';
-    return [
-      this.src ? 'src' : '',
-      this.self ? 'self' : '',
-      Array.isArray(this.domains) && this.domains ? this.domains : [],
-    ].flat(2);
-  }
-}
+import { CSPObj, CD, PermissionPolicy, BaseValues } from './lib/security';
 
 export default defineNuxtConfig({
   $development: {
@@ -76,9 +15,18 @@ export default defineNuxtConfig({
         port: 9229,
       },
       telemetry: true,
+      timeline: {
+        enabled: true
+      },
+      componentInspector: true,
+      assets: {
+        uploadExtensions: '*'
+      }
     },
   },
+
   $env: { staging: {} },
+
   app: {
     head: {
       meta: [
@@ -91,25 +39,30 @@ export default defineNuxtConfig({
       ],
     }
   },
+
   compatibilityDate: {
     default: '2024-11-01',
   },
+
   experimental: {
     appManifest: true,
     headNext: true,
   },
+
   features: {
     inlineStyles: true,
     devLogs: "silent",
   },
+
   future: {
     compatibilityVersion: 4
   },
+
   i18n: {
-    vueI18n: './configs/i18n.config.ts',
     locales: languages,
     defaultLocale: 'en-US',
   },
+
   icon: {
     collections: [
       'heroicons-solid',
@@ -119,6 +72,7 @@ export default defineNuxtConfig({
       'material-symbols',
     ],
   },
+
   modules: [
     '@nuxt/devtools',
     '@nuxtjs/tailwindcss',
@@ -128,11 +82,13 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     'nuxt-security'
   ],
+
   routeRules: {
     '/**': {
       isr: false,
     },
   },
+
   runtimeConfig: {
     supabase: {
       url: process.env.SUPABASE_URL,
@@ -140,14 +96,17 @@ export default defineNuxtConfig({
       serviceKey: process.env.SUPABASE_SERVICE_KEY,
     },
   },
+
   tailwindcss: {
     exposeConfig: true,
     viewer: { endpoint: '/_tailwind', exportViewer: true },
     config: TailwindsConfig
   },
+
   typescript: {
     typeCheck: "build",
   },
+
   vite: {
     build: {
       rollupOptions: {
@@ -166,6 +125,7 @@ export default defineNuxtConfig({
       mergeProps: true
     }
   },
+
   security: {
     corsHandler: {
       maxAge: String(864e2),
@@ -175,30 +135,31 @@ export default defineNuxtConfig({
     },
     headers: {
       contentSecurityPolicy: {
-        'img-src': new CSPObj(false, [], false, true, [
-          'data:', 'blob:',
-          [
-            'benshawmean.com', 'google.com',
-            'fontawesome.com', 'jsdelivr.net',
-            'preline.co', 'accounts.dev', 'clerk.dev',
-            'cloudflare.com', 'cloudflareinsights.com',
-            'thefemdevs.com', 'localhost',
-          ].map(CD),
-        ].flat(2)).parse(),
-        'font-src': new CSPObj(false, [], false, true, []).parse(),
-        'media-src': new CSPObj(false, [], false, true, []).parse(),
-        'child-src': new CSPObj(false, [], false, true, ['blob:']).parse(),
-        'worker-src': new CSPObj(false, [], false, true, ['blob:']).parse(),
-        'object-src': new CSPObj(true, [], false, false, []).parse(),
-        'default-src': new CSPObj(false, [], false, true, []).parse(),
-        'connect-src': new CSPObj(false, [], false, true, []).parse(),
-        'form-action': new CSPObj(false, [], false, true, []).parse(),
-        'prefetch-src': new CSPObj(false, [], false, true, []).parse(),
-        'manifest-src': new CSPObj(false, [], true, false, []).parse(),
-        'style-src': new CSPObj(false, ['unsafe-inline'], false, true, []).parse(),
-        'base-uri': new CSPObj(false, [], true, false, ['benshawmean.com']).parse(),
-        'script-src': new CSPObj(false, ['unsafe-inline', 'unsafe-eval'], true, false,
-          [
+        'img-src': new CSPObj({
+          domains: ['data:', 'blob:',
+            [
+              'benshawmean.com', 'google.com',
+              'fontawesome.com', 'jsdelivr.net',
+              'preline.co', 'accounts.dev', 'clerk.dev',
+              'cloudflare.com', 'cloudflareinsights.com',
+              'thefemdevs.com', 'localhost',
+            ].map(CD),
+          ].flat(2)
+        }).parse(),
+        'child-src': BaseValues.csp.blob,
+        'worker-src': BaseValues.csp.blob,
+        'object-src': BaseValues.csp.none,
+        'font-src': BaseValues.csp.wildcard,
+        'media-src': BaseValues.csp.wildcard,
+        'default-src': BaseValues.csp.wildcard,
+        'connect-src': BaseValues.csp.wildcard,
+        'form-action': BaseValues.csp.wildcard,
+        'prefetch-src': BaseValues.csp.wildcard,
+        'manifest-src': BaseValues.csp.self,
+        'style-src': BaseValues.csp.unsafeInline,
+        'base-uri': new CSPObj({ self: true, domains: ['benshawmean.com'] }).parse(),
+        'script-src': new CSPObj({
+          self: true, directives: ['unsafe-inline', 'unsafe-eval'], domains: [
             'blob:',
             [
               'benshawmean.com', 'google.com',
@@ -208,45 +169,45 @@ export default defineNuxtConfig({
               'thefemdevs.com', 'localhost',
             ].map(CD),
           ].flat(2),
-        ).parse(),
+        }).parse(),
       },
       permissionsPolicy: {
-        'hid': new PermissionPolicy({ none: true }).parse(),
-        'usb': new PermissionPolicy({ none: true }).parse(),
-        'midi': new PermissionPolicy({ none: true }).parse(),
-        'camera': new PermissionPolicy({ none: true }).parse(),
-        'serial': new PermissionPolicy({ none: true }).parse(),
-        'battery': new PermissionPolicy({ none: true }).parse(),
-        'gamepad': new PermissionPolicy({ none: true }).parse(),
-        'payment': new PermissionPolicy({ none: true }).parse(),
-        'autoplay': new PermissionPolicy({ none: true }).parse(),
-        'web-share': new PermissionPolicy({ self: true }).parse(),
-        'bluetooth': new PermissionPolicy({ none: true }).parse(),
-        'gyroscope': new PermissionPolicy({ none: true }).parse(),
-        'fullscreen': new PermissionPolicy({ self: true }).parse(),
-        'microphone': new PermissionPolicy({ none: true }).parse(),
-        'geolocation': new PermissionPolicy({ none: true }).parse(),
-        'magnetometer': new PermissionPolicy({ none: true }).parse(),
-        'accelerometer': new PermissionPolicy({ none: true }).parse(),
-        'idle-detection': new PermissionPolicy({ none: true }).parse(),
-        'storage-access': new PermissionPolicy({ none: true }).parse(),
-        'otp-credentials': new PermissionPolicy({ none: true }).parse(),
-        'browsing-topics': new PermissionPolicy({ none: true }).parse(),
-        'local-fonts': new PermissionPolicy({ wildcard: true }).parse(),
-        'screen-wake-lock': new PermissionPolicy({ none: true }).parse(),
-        'display-capture': new PermissionPolicy({ none: true }).parse(),
-        'document-domain': new PermissionPolicy({ none: true }).parse(),
-        'encrypted-media': new PermissionPolicy({ none: true }).parse(),
-        'speaker-selection': new PermissionPolicy({ none: true }).parse(),
-        'window-management': new PermissionPolicy({ none: true }).parse(),
-        'xr-spatial-tracking': new PermissionPolicy({ none: true }).parse(),
-        'ambient-light-sensor': new PermissionPolicy({ none: true }).parse(),
-        'picture-in-picture': new PermissionPolicy({ wildcard: true }).parse(),
-        'identity-credentials-get': new PermissionPolicy({ self: true }).parse(),
-        'publickey-credentials-get': new PermissionPolicy({ self: true }).parse(),
-        'execution-while-not-rendered': new PermissionPolicy({ none: true }).parse(),
-        'publickey-credentials-create': new PermissionPolicy({ self: true }).parse(),
-        'execution-while-out-of-viewport': new PermissionPolicy({ none: true }).parse(),
+        'hid': BaseValues.permissions.none,
+        'usb': BaseValues.permissions.none,
+        'midi': BaseValues.permissions.none,
+        'camera': BaseValues.permissions.none,
+        'serial': BaseValues.permissions.none,
+        'battery': BaseValues.permissions.none,
+        'gamepad': BaseValues.permissions.none,
+        'payment': BaseValues.permissions.none,
+        'autoplay': BaseValues.permissions.none,
+        'web-share': BaseValues.permissions.self,
+        'bluetooth': BaseValues.permissions.none,
+        'gyroscope': BaseValues.permissions.none,
+        'fullscreen': BaseValues.permissions.self,
+        'microphone': BaseValues.permissions.none,
+        'geolocation': BaseValues.permissions.none,
+        'magnetometer': BaseValues.permissions.none,
+        'accelerometer': BaseValues.permissions.none,
+        'idle-detection': BaseValues.permissions.none,
+        'storage-access': BaseValues.permissions.none,
+        'otp-credentials': BaseValues.permissions.none,
+        'browsing-topics': BaseValues.permissions.none,
+        'local-fonts': BaseValues.permissions.wildcard,
+        'display-capture': BaseValues.permissions.none,
+        'document-domain': BaseValues.permissions.none,
+        'encrypted-media': BaseValues.permissions.none,
+        'screen-wake-lock': BaseValues.permissions.none,
+        'speaker-selection': BaseValues.permissions.none,
+        'window-management': BaseValues.permissions.none,
+        'xr-spatial-tracking': BaseValues.permissions.none,
+        'ambient-light-sensor': BaseValues.permissions.none,
+        'picture-in-picture': BaseValues.permissions.wildcard,
+        'identity-credentials-get': BaseValues.permissions.self,
+        'publickey-credentials-get': BaseValues.permissions.self,
+        'execution-while-not-rendered': BaseValues.permissions.none,
+        'publickey-credentials-create': BaseValues.permissions.self,
+        'execution-while-out-of-viewport': BaseValues.permissions.none,
       },
       strictTransportSecurity: {
         includeSubdomains: true,
@@ -266,7 +227,8 @@ export default defineNuxtConfig({
     },
     hidePoweredBy: true,
   },
+
   nitro: {
     preset: 'cloudflare-pages',
-  }
+  },
 })
