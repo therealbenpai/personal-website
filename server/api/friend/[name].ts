@@ -1,11 +1,12 @@
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
     const name = getRouterParam(event, 'name');
-    const query = new QueryHelper()
+    const dbReq = new DatabaseCall<Friend>(runtimeConfig, 'friend');
+    dbReq.query
         .equal('name', name!)
         .orderBy('id')
         .addLimit(1);
-    const data = (await Database.query<Friend>(runtimeConfig, 'friend', query)).first;
+    const data = await dbReq.result.first;
     if (data) {
         const imgData = data.image!.split(':');
         switch (imgData[0]) {

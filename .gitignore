@@ -32,3 +32,5 @@ pnpm-lock.yaml
 # Testing Files
 results
 coverage
+
+/generated/prisma

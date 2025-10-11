@@ -1,9 +1,10 @@
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
     const name = getRouterParam(event, 'name');
-    const query = new QueryHelper()
+    const dbReq = new DatabaseCall<SocialMediaAccount>(runtimeConfig, 'social');
+    dbReq.query
+        .equal('name', name!)
         .orderBy('id')
-        .equal('identifier', name!)
         .addLimit(1);
-    return (await Database.query<SocialMediaAccount>(runtimeConfig, 'social', query)).first;
+    return await dbReq.result.first;
 })

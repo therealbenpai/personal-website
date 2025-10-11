@@ -3,23 +3,13 @@ useHead({
     title: 'Projects',
 });
 
-useSeoMeta({
-    description: 'A list of all of my projects.',
-    ogTitle: 'Projects',
-    ogDescription: 'A list of all of my projects.',
-    ogUrl: 'https://benshawmean.com/projects',
-    ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
-    ogImageAlt: 'Profile Picture',
-    ogType: 'website',
-    ogSiteName: "Benpai's Website",
-    twitterCard: 'summary_large_image',
-    twitterTitle: 'Projects',
-    twitterDescription: 'A list of all of my projects.',
-    twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
-    twitterImageAlt: 'Profile Picture',
-    twitterSite: '@therealbenpai',
-    twitterCreator: '@therealbenpai',
-});
+useSeoMeta(
+    Utilities.generateSEOMeta(
+        'Projects',
+        'A list of all of my projects.',
+        '/projects',
+    ),
+);
 
 const { data: projects } = await useFetch(`/api/project/all`);
 </script>

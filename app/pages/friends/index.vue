@@ -3,23 +3,13 @@ useHead({
     title: 'Friends',
 });
 
-useSeoMeta({
-    description: 'A list of all of my friends (current and former).',
-    ogTitle: 'Friends',
-    ogDescription: 'A list of all of my friends (current and former).',
-    ogUrl: 'https://benshawmean.com/friends',
-    ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
-    ogImageAlt: 'Profile Picture',
-    ogType: 'website',
-    ogSiteName: "Benpai's Website",
-    twitterCard: 'summary_large_image',
-    twitterTitle: 'Projects',
-    twitterDescription: 'A list of all my friends (current and former).',
-    twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
-    twitterImageAlt: 'Profile Picture',
-    twitterSite: '@therealbenpai',
-    twitterCreator: '@therealbenpai',
-});
+useSeoMeta(
+    Utilities.generateSEOMeta(
+        'Friends',
+        'A list of all of my friends (current and former).',
+        '/friends',
+    ),
+);
 
 const { data: friends } = await useFetch(`/api/friend/all`);
 </script>

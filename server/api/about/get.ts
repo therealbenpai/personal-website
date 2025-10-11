@@ -1,5 +1,6 @@
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    const query = new QueryHelper().orderBy('id');
-    return (await Database.query<AboutSection>(runtimeConfig, 'about', query)).all;
+    const dbReq = new DatabaseCall<AboutSection>(runtimeConfig, 'about');
+    dbReq.query.orderBy('id')
+    return await dbReq.result.all;
 })
