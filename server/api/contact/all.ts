@@ -1,4 +1,4 @@
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    return await quickDBCall<Interfaces.ContactMethod>(Enums.ResponseFormat.ALL, runtimeConfig, 'contact');
+    return await Database.quick<Interfaces.ContactMethod>(Enums.ResponseFormat.ALL, runtimeConfig, 'contact');
 })

@@ -1,4 +1,4 @@
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    return await quickDBCall<Interfaces.AboutSection>(Enums.ResponseFormat.ALL, runtimeConfig, 'about')
+    return await Database.quick<Interfaces.AboutSection>(Enums.ResponseFormat.ALL, runtimeConfig, 'about')
 })
