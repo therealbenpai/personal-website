@@ -146,14 +146,22 @@ export default defineNuxtConfig({
                 'child-src': BaseValues.csp.blob,
                 'worker-src': BaseValues.csp.blob,
                 'object-src': BaseValues.csp.none,
-                'font-src': BaseValues.csp.wildcard,
+                'font-src': new CSPObj({
+                    self: true, domains: [
+                        'data:',
+                    ], wildcard: true,
+                }).parse(),
                 'media-src': BaseValues.csp.wildcard,
                 'default-src': BaseValues.csp.wildcard,
                 'connect-src': BaseValues.csp.wildcard,
                 'form-action': BaseValues.csp.wildcard,
                 'prefetch-src': BaseValues.csp.wildcard,
                 'manifest-src': BaseValues.csp.self,
-                'style-src': BaseValues.csp.unsafeInline,
+                'style-src': new CSPObj({
+                    self: true, directives: ['unsafe-inline'], domains: [
+                        'fonts.googleapis.com',
+                    ],
+                }).parse(),
                 'base-uri': new CSPObj({ self: true, domains: ['benshawmean.com'] }).parse(),
                 'script-src': new CSPObj({
                     self: true, directives: ['unsafe-inline', 'unsafe-eval'], domains: [
