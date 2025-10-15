@@ -1,6 +1,4 @@
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
-    const dbReq = new DatabaseCall<AboutSection>(runtimeConfig, 'about');
-    dbReq.query.orderBy('id')
-    return await dbReq.result.all;
+    return await quickDBCall<Interfaces.AboutSection>(Enums.ResponseFormat.ALL, runtimeConfig, 'about')
 })

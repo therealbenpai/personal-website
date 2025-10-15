@@ -3,7 +3,7 @@ import type { RuntimeConfig as RTC } from 'nuxt/schema';
 export class QueryHelper {
     queryParams: Record<string, string> = {};
 
-    constructor() {}
+    constructor() { }
 
     addLimit(limit: number) {
         this.queryParams['limit'] = `${limit}`;
@@ -82,4 +82,22 @@ export class DatabaseCall<T> {
             },
         ).then(res => res.json()) as Promise<T[]>);
     }
+}
+
+export function quickDBCall<T, F extends Enums.ResponseFormat>(
+    form: F,
+    rtc: RTC,
+    table: string,
+    data?: Partial<T>
+): Promise<Types.Nullable<T | T[]>> {
+    const dbReq = new DatabaseCall<T>(rtc, table);
+    if (form === Enums.ResponseFormat.ONE)
+        dbReq.query.addLimit(1);
+    else if (form === Enums.ResponseFormat.ALL && data)
+        Object.entries(data)
+            .forEach(([k, v]) => {
+                if (typeof v !== 'string' && typeof v !== 'number') return;
+                dbReq.query.equal(k, v);
+            });
+    return dbReq.result[form === Enums.ResponseFormat.ONE ? 'first' : 'all'];
 }
