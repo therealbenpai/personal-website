@@ -1,44 +1,44 @@
-export class DictionaryHelper {
-    public static isEmpty(obj: object): boolean {
-        return Object.keys(obj).length === 0;
-    }
-    public static mergeDeep<T>(target: any, source: any): T {
+export class DictionaryHelper<T extends Interfaces.DeepDict<T>> {
+    constructor(private dictionary: T) { }
+    public mergeDeep(...objects: any[]): T {
         const isObject = (obj: any) => obj && typeof obj === 'object';
-        if (!isObject(target) || !isObject(source)) {
-            return source;
-        }
-        Object.keys(source).forEach(key => {
-            const targetValue = target[key];
-            const sourceValue = source[key];
-            if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
-                target[key] = targetValue.concat(sourceValue);
-            } else if (isObject(targetValue) && isObject(sourceValue)) {
-                target[key] = this.mergeDeep(targetValue, sourceValue);
-            } else {
-                target[key] = sourceValue;
-            }
-        });
-        return target;
+
+        if (!objects.every(isObject)) return objects[0];
+
+        this.dictionary = objects.reduce((acc, curr) => {
+            Object.keys(curr).forEach(key => {
+                const
+                    targetValue = acc[key],
+                    sourceValue = curr[key];
+
+                if ([targetValue, sourceValue].every(Array.isArray))
+                    return void (acc[key] = targetValue.concat(sourceValue));
+
+                if ([targetValue, sourceValue].every(isObject))
+                    return void (acc[key] = this.mergeDeep(targetValue, sourceValue));
+
+                return void (acc[key] = sourceValue);
+            });
+            return acc;
+        }, this.dictionary);
+        return this.dictionary;
     }
-    public static deepClone<T>(obj: T): T {
-        return JSON.parse(JSON.stringify(obj));
+    public deepClone(): T {
+        return JSON.parse(JSON.stringify(this.dictionary));
     }
-    public static deepGet<T>(obj: Interfaces.DeepDict<T>, path: string, defaultValue?: T): T | undefined {
+    public deepGet<KT>(path: string, defaultValue?: KT): any | KT | undefined {
         const keys = path.split('.');
-        let result: any = obj;
+        let result: any = this.dictionary;
         for (const key of keys) {
-            if (result && typeof result === 'object' && key in result) {
-                result = result[key];
-            } else {
-                return defaultValue;
-            }
+            if (result && typeof result === 'object' && key in result) result = result[key];
+            else return defaultValue;
         }
         return result as T;
     }
-    public static deepSet<T>(obj: Interfaces.DeepDict<T>, path: string, value: T): void {
+    public deepSet(path: string, value: any): ThisType<T> {
         const keys = path.split('.') as (keyof Interfaces.DeepDict<T>)[];
-        if (keys.some(key => key === undefined || typeof key !== 'string')) return;
-        let current: any = obj;
+        if (keys.some(key => key === undefined || typeof key !== 'string')) return this;
+        let current: any = this.dictionary;
         for (const key of keys) {
             if (key === keys[keys.length - 1]) {
                 current[key] = value;
@@ -49,29 +49,32 @@ export class DictionaryHelper {
                 current = current[key];
             }
         }
+        return this;
     }
-    public static deepFlatten<T>(obj: Interfaces.DeepDict<T>, parentKey = '', result: Interfaces.DeepDict<T> = {}): Interfaces.DeepDict<T> {
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
+    public deepFlatten(parentKey = ''): ThisType<T> {
+        const result: Interfaces.DeepDict<T> = {};
+        for (const key in this.dictionary) {
+            if (this.dictionary.hasOwnProperty(key)) {
                 const newKey = parentKey ? `${parentKey}.${key}` : key;
-                if (typeof obj[key] === 'object' && obj[key] !== null) {
-                    this.deepFlatten(obj[key] as Interfaces.DeepDict<T>, newKey, result);
+                if (typeof this.dictionary[key] === 'object' && this.dictionary[key] !== null) {
+                    this.deepFlatten(key);
                 } else {
-                    result[newKey] = obj[key]!;
+                    result[newKey] = this.dictionary[key]!;
                 }
             }
         }
-        return result;
+        this.dictionary = result as T;
+        return this;
     }
-    public static deepUnflatten<T>(obj: Interfaces.DeepDict<T>): Interfaces.DeepDict<T> {
+    public deepUnflatten(): ThisType<T> {
         const result: Interfaces.DeepDict<T> = {};
-        for (const flatKey in obj) {
-            if (obj.hasOwnProperty(flatKey)) {
+        for (const flatKey in this.dictionary) {
+            if (this.dictionary.hasOwnProperty(flatKey)) {
                 const keys = flatKey.split('.');
                 let current: any = result;
                 keys.forEach((key, index) => {
                     if (index === keys.length - 1) {
-                        current[key] = obj[flatKey];
+                        current[key] = this.dictionary[flatKey];
                     } else {
                         if (!current[key] || typeof current[key] !== 'object') {
                             current[key] = {};
@@ -81,26 +84,24 @@ export class DictionaryHelper {
                 });
             }
         }
-        return result;
+        this.dictionary = result as T;
+        return this;
     }
-    public static pick<T extends Interfaces.DeepDict<T>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
+    public pick<K extends keyof T>(keys: K[]): Pick<T, K> {
         const result = {} as Pick<T, K>;
         keys.forEach(key => {
-            if (key in obj) {
-                result[key] = obj[key];
+            if (key in this.dictionary) {
+                result[key] = this.dictionary[key];
             }
         });
         return result;
     }
-    public static omit<T extends Interfaces.DeepDict<T>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
-        const result = { ...obj } as Omit<T, K>;
+    public omit<K extends keyof T>(keys: K[]): Omit<T, K> {
+        const result = { ...this.dictionary };
         keys.forEach(key => {
-            if (key in result) {
-                // @ts-expect-error TS doesn't understand this :shrug:
-                delete result[key];
-            }
+            if (key in result) delete result[key];
         });
-        return result;
+        return result as Omit<T, K>;
     }
 }
 

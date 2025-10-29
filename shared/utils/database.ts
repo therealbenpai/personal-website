@@ -76,7 +76,7 @@ export class DatabaseCall<T> {
             `${this.rtc.supabase.url}/rest/v1/${this.table}?${this.query.build()}`,
             {
                 headers: {
-                    apikey: this.rtc.supabase.key,
+                    apikey: this.rtc.supabase.keys.anon,
                     'Accept-Profile': 'ben',
                 },
             },
