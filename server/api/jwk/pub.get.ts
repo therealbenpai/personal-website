@@ -1,8 +1,13 @@
 // server/api/jwt/keys/pub.get.ts
 
 export default defineEventHandler(async () => {
-    return Buffer.from(
-        "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFQnRIZmJldmk0WnUwdlNqdzhqcEorQ3JBaFM5bQptVVB0L2dQNTBrSEhQaXhZenM0Tk5mUlVFS0tnSGtHOWg5SERvQmlnS05pRWlQY0kxaGNxTHZ6dkFRPT0KLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==",
-        "base64"
-    ).toString('utf-8');
+    return {
+        "kty": "EC",
+        "use": "sig",
+        "crv": "P-256",
+        "kid": "rqoP9XbsDWdU1vF7t+8RP/tYdpo=",
+        "x": "BtHfbevi4Zu0vSjw8jpJ-CrAhS9mmUPt_gP50kHHPiw",
+        "y": "WM7ODTX0VBCioB5BvYfRw6AYoCjYhIj3CNYXKi787wE",
+        "alg": "ES256"
+    }
 });
