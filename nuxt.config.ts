@@ -92,6 +92,14 @@ export default defineNuxtConfig({
             key: process.env.SUPABASE_KEY,
             serviceKey: process.env.SUPABASE_SERVICE_KEY,
         },
+        jwk: {
+            privKey: process.env.JWK_PRIV_KEY,
+        },
+        public: {
+            jwk: {
+                pubKey: process.env.JWK_PUB_KEY,
+            }
+        }
     },
 
     tailwindcss: {
@@ -181,35 +189,22 @@ export default defineNuxtConfig({
                 }).parse(),
             },
             permissionsPolicy: {
-                'hid': BaseValues.permissions.none,
-                'usb': BaseValues.permissions.none,
-                'midi': BaseValues.permissions.none,
-                'camera': BaseValues.permissions.none,
-                'serial': BaseValues.permissions.none,
-                'gamepad': BaseValues.permissions.none,
-                'payment': BaseValues.permissions.none,
-                'autoplay': BaseValues.permissions.none,
-                'web-share': BaseValues.permissions.self,
-                'bluetooth': BaseValues.permissions.none,
-                'gyroscope': BaseValues.permissions.none,
-                'fullscreen': BaseValues.permissions.self,
-                'microphone': BaseValues.permissions.none,
-                'geolocation': BaseValues.permissions.none,
-                'magnetometer': BaseValues.permissions.none,
-                'accelerometer': BaseValues.permissions.none,
-                'idle-detection': BaseValues.permissions.none,
-                'storage-access': BaseValues.permissions.none,
-                'otp-credentials': BaseValues.permissions.none,
-                'local-fonts': BaseValues.permissions.wildcard,
-                'display-capture': BaseValues.permissions.none,
-                'encrypted-media': BaseValues.permissions.none,
-                'screen-wake-lock': BaseValues.permissions.none,
-                'window-management': BaseValues.permissions.none,
-                'xr-spatial-tracking': BaseValues.permissions.none,
-                'picture-in-picture': BaseValues.permissions.wildcard,
-                'identity-credentials-get': BaseValues.permissions.self,
-                'publickey-credentials-get': BaseValues.permissions.self,
-                'publickey-credentials-create': BaseValues.permissions.self,
+                ...Object.fromEntries(
+                    [
+                        'hid', 'usb', 'midi', 'camera', 'serial', 'gamepad', 'payment',
+                        'autoplay', 'bluetooth', 'gyroscope', 'microphone', 'geolocation',
+                        'magnetometer', 'accelerometer', 'idle-detection', 'storage-access',
+                        'otp-credentials', 'display-capture', 'encrypted-media',
+                        'screen-wake-lock', 'window-management', 'xr-spatial-tracking',
+                    ].map((p) => [p, BaseValues.permissions.none]),
+                ),
+                ...Object.fromEntries(
+                    ['web-share', 'fullscreen', 'identity-credentials-get', 'publickey-credentials-get', 'publickey-credentials-create']
+                        .map((p) => [p, BaseValues.permissions.self]),
+                ),
+                ...Object.fromEntries(
+                    ['local-fonts', 'picture-in-picture'].map((p) => [p, BaseValues.permissions.wildcard]),
+                ),
             },
             strictTransportSecurity: {
                 includeSubdomains: true,
