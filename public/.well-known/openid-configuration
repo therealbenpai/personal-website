@@ -1,0 +1,4 @@
+{
+    "issuer": "https://benshawmean.com/",
+    "jwks_uri": "https://benshawmean.com/.well-known/jwks.json"
+}
