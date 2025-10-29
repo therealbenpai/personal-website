@@ -139,6 +139,7 @@ export default defineNuxtConfig({
             credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
             allowHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-HTTP-Method-Override', 'Accept', 'Origin'],
+            origin: '*',
         },
         headers: {
             contentSecurityPolicy: {
