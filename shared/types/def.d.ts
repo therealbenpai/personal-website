@@ -74,6 +74,21 @@ declare namespace Interfaces {
     interface DeepDict<T> {
         [key: string]: T | DeepDict<T>;
     }
+
+    interface JWKSList {
+        keys: JWKS[];
+    }
+
+    interface JWKS {
+        kty: string;
+        d?: string;
+        use: string;
+        crv: string;
+        kid: string;
+        x: string;
+        y: string;
+        alg: string;
+    }
 }
 
 declare namespace Types {

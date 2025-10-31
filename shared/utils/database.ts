@@ -5,6 +5,11 @@ export class QueryHelper {
 
     constructor() { }
 
+    addSelect(...fields: string[]) {
+        this.queryParams['select'] = fields.join(',');
+        return this;
+    }
+
     addLimit(limit: number) {
         this.queryParams['limit'] = `${limit}`;
         return this;
@@ -41,8 +46,7 @@ export class QueryHelper {
 }
 
 export class DatabaseResponse<T> {
-    data: Promise<T[] | null> = new Promise((resolve, reject) => {
-    });
+    data: Promise<T[] | null> = new Promise((resolve, reject) => { });
 
     constructor(data: Promise<T[] | null>) {
         this.data = data;
@@ -57,18 +61,23 @@ export class DatabaseResponse<T> {
     }
 }
 
-export class DatabaseCall<T> {
+type UserTypes = keyof RTC['supabase']['keys'];
+
+export class DatabaseCall<T, P = UserTypes> {
     rtc: RTC;
     table: string;
     query: QueryHelper;
+    perm: P;
 
     constructor(
         rtc: RTC,
         table: string,
+        perm?: P,
     ) {
         this.rtc = rtc;
         this.table = table;
         this.query = new QueryHelper();
+        this.perm = perm || 'anon' as P;
     }
 
     get result() {
@@ -76,7 +85,7 @@ export class DatabaseCall<T> {
             `${this.rtc.supabase.url}/rest/v1/${this.table}?${this.query.build()}`,
             {
                 headers: {
-                    apikey: this.rtc.supabase.keys.anon,
+                    apikey: this.rtc.supabase.keys[this.perm as keyof typeof this.rtc.supabase.keys],
                     'Accept-Profile': 'ben',
                 },
             },
