@@ -22,6 +22,9 @@ export default defineNuxtConfig({
                 uploadExtensions: '*',
             },
         },
+        nitro: {
+            preset: "deno"
+        }
     },
 
     $env: { staging: {} },
@@ -43,9 +46,7 @@ export default defineNuxtConfig({
         },
     },
 
-    compatibilityDate: {
-        default: '2024-11-01',
-    },
+    compatibilityDate: '2025-12-10',
 
     experimental: {
         appManifest: true,
@@ -55,10 +56,6 @@ export default defineNuxtConfig({
     features: {
         inlineStyles: true,
         devLogs: 'silent',
-    },
-
-    future: {
-        compatibilityVersion: 4,
     },
 
     icon: {
@@ -94,14 +91,6 @@ export default defineNuxtConfig({
                 service: process.env.SUPABASE_SERVICE_KEY,
             },
         },
-        jwk: {
-            privKey: process.env.JWK_PRIV_KEY,
-        },
-        public: {
-            jwk: {
-                pubKey: process.env.JWK_PUB_KEY,
-            }
-        }
     },
 
     tailwindcss: {
@@ -229,6 +218,6 @@ export default defineNuxtConfig({
     },
 
     nitro: {
-        preset: 'cloudflare-pages',
+        preset: 'deno-deploy'
     },
 });

@@ -173,17 +173,6 @@ export class NumberHelper {
     public static randomInt(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    public static isEven(num: number): boolean {
-        return num % 2 === 0;
-    }
-    public static isOdd(num: number): boolean {
-        return num % 2 !== 0;
-    }
-    public static toOrdinal(num: number): string {
-        const suffixes = ['th', 'st', 'nd', 'rd'];
-        const v = num % 100;
-        return num + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]!);
-    }
     public static round(num: number, decimals: number = 0): number {
         const factor = Math.pow(10, decimals);
         return Math.round(num * factor) / factor;

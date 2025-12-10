@@ -35,12 +35,10 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "^2.5.0",
-    "@nuxt/eslint": "^0.7.6",
     "@types/node": "latest"
   },
   "engines": {
     "node": ">=22",
     "npm": ">=8"
-  },
-  "packageManager": "pnpm@10.20.0"
+  }
 }
