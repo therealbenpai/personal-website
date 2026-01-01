@@ -1,7 +1,29 @@
 <script setup lang="ts">
 const route = useRoute();
 const { friend } = route.params;
-const { data: friendData } = await useFetch(`/api/friend/${(friend as string).toLowerCase()}`);
+const { data: friendData } = await useFetch(
+    `/api/friend/${(friend as string).toLowerCase()}`
+);
+
+if (friendData.value) {
+    useSeoMeta({
+        ogUrl: `https://benshawmean.com/friends/${(friend as string).toLowerCase()}`,
+        ogTitle: `${friendData.value?.name} - Benpai's Website`,
+        twitterTitle: `${friendData.value?.name} - Benpai's Website`,
+        description: friendData.value?.description || 'No description available',
+        ogDescription: friendData.value?.description || 'No description available',
+        twitterDescription: friendData.value?.description || 'No description available',
+        ogImage: friendData.value?.image,
+        ogImageAlt: 'Profile Picture',
+        ogType: 'website',
+        ogSiteName: "Benpai's Website",
+        twitterCard: 'summary_large_image',
+        twitterImage: friendData.value?.image,
+        twitterImageAlt: 'Profile Picture',
+        twitterSite: '@therealbenpai',
+        twitterCreator: '@therealbenpai',
+    });
+}
 </script>
 
 <template>
@@ -11,7 +33,8 @@ const { data: friendData } = await useFetch(`/api/friend/${(friend as string).to
     >
         <h1 class="text-4xl font-bold">No Friend Found Here</h1>
         <p class="text-lg">
-            We were unable to find a friend by this name. Could you have typed it in wrong?
+            We were unable to find a friend by this name. Could you have typed
+            it in wrong?
         </p>
     </div>
     <div
@@ -34,7 +57,11 @@ const { data: friendData } = await useFetch(`/api/friend/${(friend as string).to
         </p>
         <p class="text-md text-stone-500">
             {{ Formatter.processTime(friendData.start) }} to
-            {{ friendData.end ? Formatter.processTime(friendData.end) : 'Present' }}
+            {{
+                friendData.end
+                    ? Formatter.processTime(friendData.end)
+                    : 'Present'
+            }}
         </p>
         <p
             class="text-md text-stone-500"
