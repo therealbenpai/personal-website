@@ -1,7 +1,9 @@
+import _ from 'lodash';
+
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event);
     const name = getRouterParam(event, 'name');
-    const data = await Database.quick<Interfaces.Friend>(Enums.ResponseFormat.ONE, runtimeConfig, 'friend', { name });
+    const data = await Database.quick<Interfaces.Friend>(Enums.ResponseFormat.ONE, runtimeConfig, 'friend', { name: _.capitalize(name) });
     if (data) {
         const imgData = data.image!.split(':');
         switch (imgData[0]) {
