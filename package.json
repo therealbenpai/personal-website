@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "^2.5.0",
+    "@types/lodash": "^4.17.21",
     "@types/node": "latest"
   },
   "engines": {
