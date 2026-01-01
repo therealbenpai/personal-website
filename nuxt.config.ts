@@ -139,7 +139,7 @@ export default defineNuxtConfig({
                             'fontawesome.com', 'jsdelivr.net',
                             'preline.co', 'accounts.dev', 'clerk.dev',
                             'cloudflare.com', 'cloudflareinsights.com',
-                            'thefemdevs.com', 'localhost',
+                            'ted.ac', 'thefemdevs.com', 'localhost',
                         ].map(CD),
                     ].flat(2),
                 }).parse(),
