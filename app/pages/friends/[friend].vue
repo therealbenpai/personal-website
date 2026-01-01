@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
 const { friend } = route.params;
-const { data: friendData } = await useFetch(`/api/friend/${friend}`);
+const { data: friendData } = await useFetch(`/api/friend/${(friend as string).toLowerCase()}`);
 </script>
 
 <template>
