@@ -68,14 +68,7 @@ export default defineNuxtConfig({
         ],
     },
 
-    modules: [
-        '@nuxt/devtools',
-        '@nuxtjs/tailwindcss',
-        '@nuxt/fonts',
-        '@nuxt/scripts',
-        '@nuxt/icon',
-        'nuxt-security',
-    ],
+    modules: ['@nuxt/devtools', '@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxt/scripts', '@nuxt/icon', 'nuxt-security', 'nuxt-og-image'],
 
     routeRules: {
         '/**': {

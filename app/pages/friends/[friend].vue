@@ -1,24 +1,31 @@
 <script setup lang="ts">
 const route = useRoute();
 const { friend } = route.params;
-const { data: friendData } = await useFetch(
-    `/api/friend/${(friend as string).toLowerCase()}`
-);
+const friendProper = (friend as string).toLowerCase();
+const { data: friendData } = await useFetch(`/api/friend/${friendProper}`);
 
-if (friendData.value) {
+if (friendData.value && !Array.isArray(friendData.value)) {
+    defineOgImageComponent('FriendMetaBanner', {
+        userName: friendData.value.name || 'Unknown',
+        image: friendData.value.image, // There will ALWAYS be an image
+        description: friendData.value.description || 'No description available',
+    });
+
+    const pageTitle = `${friendData.value.name} - Benpai's Website`,
+        pageDescription =
+            friendData.value.description || 'No description available';
+
     useSeoMeta({
-        ogUrl: `https://benshawmean.com/friends/${(friend as string).toLowerCase()}`,
-        ogTitle: `${friendData.value?.name} - Benpai's Website`,
-        twitterTitle: `${friendData.value?.name} - Benpai's Website`,
-        description: friendData.value?.description || 'No description available',
-        ogDescription: friendData.value?.description || 'No description available',
-        twitterDescription: friendData.value?.description || 'No description available',
-        ogImage: friendData.value?.image,
+        ogUrl: `https://benshawmean.com/friends/${friendProper}`,
+        ogTitle: pageTitle,
+        twitterTitle: pageTitle,
+        description: pageDescription,
+        ogDescription: pageDescription,
+        twitterDescription: pageDescription,
         ogImageAlt: 'Profile Picture',
         ogType: 'website',
         ogSiteName: "Benpai's Website",
         twitterCard: 'summary_large_image',
-        twitterImage: friendData.value?.image,
         twitterImageAlt: 'Profile Picture',
         twitterSite: '@therealbenpai',
         twitterCreator: '@therealbenpai',
