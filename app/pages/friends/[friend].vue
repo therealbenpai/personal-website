@@ -5,11 +5,19 @@ const friendProper = (friend as string).toLowerCase();
 const { data: friendData } = await useFetch(`/api/friend/${friendProper}`);
 
 if (friendData.value && !Array.isArray(friendData.value)) {
-    defineOgImageComponent('FriendMetaBanner', {
-        userName: friendData.value.name || 'Unknown',
-        image: friendData.value.image, // There will ALWAYS be an image
-        description: friendData.value.description || 'No description available',
-    });
+    defineOgImageComponent(
+        'FriendMetaBanner',
+        {
+            userName: friendData.value.name || 'Unknown',
+            image: friendData.value.image, // There will ALWAYS be an image
+            description:
+                friendData.value.description || 'No description available',
+        },
+        {
+            cacheMaxAgeSeconds: 180,
+            alt: `Friend Banner of ${friendData.value.name || 'Unknown'}`
+        }
+    );
 
     const pageTitle = `${friendData.value.name} - Benpai's Website`,
         pageDescription =

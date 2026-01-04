@@ -15,12 +15,12 @@ withDefaults(
 
 <template>
     <div
-        class="flex flex-row self-center items-center justify-center size-full gap-32 bg-stone-300"
+        class="flex flex-row self-center items-center justify-center size-full gap-24 bg-stone-300"
     >
         <img class="rounded-full size-72" :src="image" />
         <div class="flex flex-col items-center self-center justify-center size-[50%]">
-            <h1 class="text-4xl font-black underline">{{ userName }}</h1>
-            <p class="text-xl text-center font-bold text-wrap">
+            <h1 class="text-6xl font-black underline">{{ userName }}</h1>
+            <p class="text-2xl text-center font-bold text-wrap">
                 {{ description }}
             </p>
         </div>
