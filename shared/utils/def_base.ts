@@ -1,25 +1,41 @@
 // this file is used to create the enums that are used in the project. definitions are in ../types/defs.d.ts
 
 enum ResponseFormat {
-    ALL,
-    ONE,
+    One,
+    All,
 }
 
 enum ProjectStatus {
-    IN_PROGRESS = 'in progress',
-    BETA = 'beta',
-    RELEASED = 'released',
-    ARCHIVED = 'archived',
-    DROPPED = 'dropped',
+    In_Progress = 'in progress',
+    Beta = 'beta',
+    Released = 'released',
+    Archived = 'archived',
+    Dropped = 'dropped',
 }
 
 enum PublicationStatus {
-    OPEN = 'open',
-    CLOSED = 'closed',
+    Open = 'open',
+    Closed = 'closed',
+}
+
+enum HealthType {
+    Mental = 'mental',
+    Physical = 'physical',
+    Other = 'other',
+}
+
+enum HealthProviders {
+    MayoClinic = 'Mayo Clinic',
+    Wikipedia = 'Wikipedia',
+    CDC = 'CDC',
+    NIH = 'NIH',
+    ClevelandClinic = 'Cleveland Clinic',
 }
 
 export class Enums {
     static ResponseFormat = ResponseFormat;
     static ProjectStatus = ProjectStatus;
     static PublicationStatus = PublicationStatus;
+    static HealthType = HealthType;
+    static HealthProviders = HealthProviders;
 }

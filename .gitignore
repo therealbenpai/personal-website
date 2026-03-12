@@ -34,3 +34,5 @@ results
 coverage
 
 /generated/prisma
+
+.vscode

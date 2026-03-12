@@ -59,16 +59,31 @@ export default defineNuxtConfig({
     },
 
     icon: {
+        customCollections: [
+            {
+                prefix: 'custom',
+                dir: './app/assets/icons',
+            }
+        ],
         collections: [
             'heroicons-solid',
             'fa-solid',
             'fa-brands',
             'simple-icons',
             'material-symbols',
+            'healthicons',
         ],
     },
 
-    modules: ['@nuxt/devtools', '@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxt/scripts', '@nuxt/icon', 'nuxt-security', 'nuxt-og-image'],
+    modules: [
+        '@nuxt/devtools',
+        '@nuxtjs/tailwindcss',
+        '@nuxt/fonts',
+        '@nuxt/scripts',
+        '@nuxt/icon',
+        'nuxt-security',
+        'nuxt-og-image',
+    ],
 
     routeRules: {
         '/**': {
@@ -133,6 +148,7 @@ export default defineNuxtConfig({
                             'preline.co', 'accounts.dev', 'clerk.dev',
                             'cloudflare.com', 'cloudflareinsights.com',
                             'ted.ac', 'thefemdevs.com', 'localhost',
+                            'hackerone.com',
                         ].map(CD),
                     ].flat(2),
                 }).parse(),
@@ -169,6 +185,7 @@ export default defineNuxtConfig({
                             'preline.co', 'accounts.dev', 'clerk.dev',
                             'cloudflare.com', 'cloudflareinsights.com',
                             'thefemdevs.com', 'localhost',
+                            'hackerone.com',
                         ].map(CD),
                     ].flat(2),
                 }).parse(),

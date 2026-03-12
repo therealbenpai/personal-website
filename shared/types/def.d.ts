@@ -1,20 +1,35 @@
 declare namespace Enums {
     enum ResponseFormat {
-        ALL,
-        ONE,
+        All,
+        One,
     }
 
     enum ProjectStatus {
-        IN_PROGRESS = 'in progress',
-        BETA = 'beta',
-        RELEASED = 'released',
-        ARCHIVED = 'archived',
-        DROPPED = 'dropped',
+        In_Progress = 'in progress',
+        Beta = 'beta',
+        Released = 'released',
+        Archived = 'archived',
+        Dropped = 'dropped',
     }
 
     enum PublicationStatus {
-        OPEN = 'open',
-        CLOSED = 'closed',
+        Open = 'open',
+        Closed = 'closed',
+    }
+
+    enum HealthType {
+        Mental = 'mental',
+        Physical = 'physical',
+        Other = 'other',
+    }
+
+    enum HealthProviders {
+        MayoClinic = 'Mayo Clinic',
+        Wikipedia = 'Wikipedia',
+        CDC = 'CDC',
+        NIH = 'NIH',
+        ClevelandClinic = 'Cleveland Clinic',
+        NHS = 'NHS',
     }
 }
 
@@ -64,6 +79,23 @@ declare namespace Interfaces {
         identifier: string;
         link: string;
         icon: string;
+    }
+
+    interface HealthLink {
+        identifier: string;
+        link: string;
+        display: string;
+        provider: Enums.HealthProviders;
+    }
+
+    interface Health {
+        name: string;
+        fullname: string;
+        description: string;
+        type: Enums.HealthType;
+        aka: string;
+        personal: string;
+        links: HealthLink[];
     }
 
     interface SQLRequest {

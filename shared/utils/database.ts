@@ -94,12 +94,12 @@ export class DatabaseCall<T, P = UserTypes> {
 }
 
 export class Database {
-    static quick<T, F = Enums.ResponseFormat.ONE>(form: F, rtc: RTC, table: string, data: Partial<T>): Promise<Types.Nullable<T>>;
-    static quick<T, F = Enums.ResponseFormat.ALL>(form: F, rtc: RTC, table: string): Promise<Types.Nullable<T[]>>;
+    static quick<T, F = Enums.ResponseFormat.One>(form: F, rtc: RTC, table: string, data: Partial<T>): Promise<Types.Nullable<T>>;
+    static quick<T, F = Enums.ResponseFormat.All>(form: F, rtc: RTC, table: string): Promise<Types.Nullable<T[]>>;
     static quick<T, F extends Enums.ResponseFormat>(form: F, rtc: RTC, table: string, data?: Partial<T>): Promise<Types.Nullable<T | T[]>> {
         const dbReq = new DatabaseCall<T>(rtc, table);
         dbReq.query.orderBy('id', true);
-        if (form === Enums.ResponseFormat.ONE) {
+        if (form === Enums.ResponseFormat.One) {
             Object.entries(data!)
                 .forEach(([k, v]) => {
                     if (typeof v !== 'string' && typeof v !== 'number') return;
@@ -107,6 +107,6 @@ export class Database {
                 });
             dbReq.query.addLimit(1);
         }
-        return dbReq.result[form === Enums.ResponseFormat.ONE ? 'first' : 'all'];
+        return dbReq.result[form === Enums.ResponseFormat.One ? 'first' : 'all'];
     }
 }

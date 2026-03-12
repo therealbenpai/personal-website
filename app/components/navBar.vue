@@ -27,6 +27,11 @@ const links: Link[] = [
         icon: 'mdi:email',
     },
     {
+        name: 'Health',
+        url: '/health',
+        icon: 'mdi:heart-pulse',
+    },
+    {
         name: 'Friends',
         url: '/friends',
         icon: 'mdi:account-multiple',
