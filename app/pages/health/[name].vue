@@ -1,31 +1,43 @@
 <script setup lang="ts">
 import _ from 'lodash';
 
-useHead({
-    title: 'Health',
-});
-
-useSeoMeta({
-    description: 'Information about my health and wellness.',
-    ogTitle: 'Health',
-    ogDescription: 'Information about my health and wellness.',
-    ogUrl: 'https://benshawmean.com/health',
-    ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
-    ogImageAlt: 'Profile Picture',
-    ogType: 'website',
-    ogSiteName: "Benpai's Website",
-    twitterCard: 'summary_large_image',
-    twitterTitle: 'Health',
-    twitterDescription: 'Information about my health and wellness.',
-    twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
-    twitterImageAlt: 'Profile Picture',
-    twitterSite: '@therealbenpai',
-    twitterCreator: '@therealbenpai',
-});
-
 const route = useRoute();
 const { name } = route.params;
 const { data: healthData } = await useFetch(`/api/health/${name}`);
+
+if (healthData.value && !Array.isArray(healthData.value)) {
+    defineOgImageComponent(
+        'HealthMetaBanner',
+        {
+            name: healthData.value.fullname || 'Unknown',
+            icon: Mapper.getHealthIcon(healthData.value.type) || 'healthicons:health-outline',
+        },
+        {
+            cacheMaxAgeSeconds: 180,
+            alt: `Health Banner of ${healthData.value.fullname || 'Unknown'}`
+        }
+    );
+
+    const pageTitle = `${healthData.value.fullname} - Benpai's Website`,
+        pageDescription =
+            healthData.value.description.split('\n')[0] || 'No description available';
+
+    useSeoMeta({
+        ogUrl: `https://benshawmean.com/health/${name}`,
+        ogTitle: pageTitle,
+        twitterTitle: pageTitle,
+        description: pageDescription,
+        ogDescription: pageDescription,
+        twitterDescription: pageDescription,
+        ogImageAlt: 'Profile Picture',
+        ogType: 'website',
+        ogSiteName: "Benpai's Website",
+        twitterCard: 'summary_large_image',
+        twitterImageAlt: 'Profile Picture',
+        twitterSite: '@therealbenpai',
+        twitterCreator: '@therealbenpai',
+    });
+}
 </script>
 
 <template>

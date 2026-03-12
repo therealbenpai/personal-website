@@ -1,29 +1,41 @@
 <script setup lang="ts">
-useHead({
-    title: 'Projects',
-});
-
-useSeoMeta({
-    description: 'A list of all of my projects.',
-    ogTitle: 'Projects',
-    ogDescription: 'A list of all of my projects.',
-    ogUrl: 'https://benshawmean.com/projects',
-    ogImage: 'https://cdn.benshawmean.com/meta-banner.png',
-    ogImageAlt: 'Profile Picture',
-    ogType: 'website',
-    ogSiteName: "Benpai's Website",
-    twitterCard: 'summary_large_image',
-    twitterTitle: 'Projects',
-    twitterDescription: 'A list of all of my projects.',
-    twitterImage: 'https://cdn.benshawmean.com/meta-banner.png',
-    twitterImageAlt: 'Profile Picture',
-    twitterSite: '@therealbenpai',
-    twitterCreator: '@therealbenpai',
-});
-
 const route = useRoute();
 const { project } = route.params;
 const { data: projectData } = await useFetch(`/api/project/${project}`);
+
+if (projectData.value && !Array.isArray(projectData.value)) {
+    defineOgImageComponent(
+        'ProjectMetaBanner',
+        {
+            name: projectData.value.name || 'Unknown',
+            icon: 'mdi:github',
+        },
+        {
+            cacheMaxAgeSeconds: 180,
+            alt: `Project Banner of ${projectData.value.name || 'Unknown'}`
+        }
+    );
+
+    const pageTitle = `${projectData.value.name} - Benpai's Website`,
+        pageDescription =
+            projectData.value.description.split('\n')[0] || 'No description available';
+
+    useSeoMeta({
+        ogUrl: `https://benshawmean.com/projects/${project}`,
+        ogTitle: pageTitle,
+        twitterTitle: pageTitle,
+        description: pageDescription,
+        ogDescription: pageDescription,
+        twitterDescription: pageDescription,
+        ogImageAlt: 'Profile Picture',
+        ogType: 'website',
+        ogSiteName: "Benpai's Website",
+        twitterCard: 'summary_large_image',
+        twitterImageAlt: 'Profile Picture',
+        twitterSite: '@therealbenpai',
+        twitterCreator: '@therealbenpai',
+    });
+}
 </script>
 
 <template>

@@ -1,11 +1,36 @@
 <script setup lang="ts">
-useHead({
-    title: 'Homepage',
-});
-
-useSeoMeta(Utilities.generateSEOMeta('Homepage', 'About me', '/'));
-
 const { data: sections } = await useFetch(`/api/about/get`);
+
+defineOgImageComponent(
+    'BasicMetaBanner',
+    {
+        page: 'About Me',
+        icon: 'mdi:account'
+    },
+    {
+        cacheMaxAgeSeconds: 180,
+        alt: `About Me Banner`,
+    }
+);
+
+const pageTitle = `About Me - Benpai's Website`,
+    pageDescription = 'Learn more about me, my background, and the various technologies I work with.';
+
+useSeoMeta({
+    ogUrl: `https://benshawmean.com`,
+    ogTitle: pageTitle,
+    twitterTitle: pageTitle,
+    description: pageDescription,
+    ogDescription: pageDescription,
+    twitterDescription: pageDescription,
+    ogImageAlt: 'Profile Picture',
+    ogType: 'website',
+    ogSiteName: "Benpai's Website",
+    twitterCard: 'summary_large_image',
+    twitterImageAlt: 'Profile Picture',
+    twitterSite: '@therealbenpai',
+    twitterCreator: '@therealbenpai',
+});
 </script>
 
 <template>

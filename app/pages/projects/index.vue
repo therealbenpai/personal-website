@@ -1,17 +1,37 @@
 <script setup lang="ts">
-useHead({
-    title: 'Projects',
-});
+const { data: projects } = await useFetch(`/api/project/all`);
 
-useSeoMeta(
-    Utilities.generateSEOMeta(
-        'Projects',
-        'A list of all of my projects.',
-        '/projects',
-    ),
+defineOgImageComponent(
+    'BasicMetaBanner',
+    {
+        page: 'Projects',
+        description: 'A list of all of my projects.',
+        icon: 'mdi:github',
+    },
+    {
+        cacheMaxAgeSeconds: 180,
+        alt: `Projects Banner`,
+    }
 );
 
-const { data: projects } = await useFetch(`/api/project/all`);
+const pageTitle = `Projects - Benpai's Website`,
+    pageDescription = 'A list of all of my projects.';
+
+useSeoMeta({
+    ogUrl: `https://benshawmean.com/projects`,
+    ogTitle: pageTitle,
+    twitterTitle: pageTitle,
+    description: pageDescription,
+    ogDescription: pageDescription,
+    twitterDescription: pageDescription,
+    ogImageAlt: 'Profile Picture',
+    ogType: 'website',
+    ogSiteName: "Benpai's Website",
+    twitterCard: 'summary_large_image',
+    twitterImageAlt: 'Profile Picture',
+    twitterSite: '@therealbenpai',
+    twitterCreator: '@therealbenpai',
+});
 </script>
 
 <template>

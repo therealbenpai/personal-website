@@ -2,6 +2,40 @@
 const route = useRoute();
 const { social } = route.params;
 const { data: socialData } = await useFetch(`/api/social/${social}`);
+
+if (socialData.value && !Array.isArray(socialData.value)) {
+    defineOgImageComponent(
+        'ProjectMetaBanner',
+        {
+            name: socialData.value.platform || 'Unknown',
+            icon: 'mdi:github',
+            identifier: socialData.value.identifier || 'unknown',
+        },
+        {
+            cacheMaxAgeSeconds: 180,
+            alt: `Project Banner of ${socialData.value.platform || 'Unknown'}`
+        }
+    );
+
+    const pageTitle = `${socialData.value.platform} - Benpai's Website`,
+        pageDescription = 'No description available.';
+
+    useSeoMeta({
+        ogUrl: `https://benshawmean.com/socials/${social}`,
+        ogTitle: pageTitle,
+        twitterTitle: pageTitle,
+        description: pageDescription,
+        ogDescription: pageDescription,
+        twitterDescription: pageDescription,
+        ogImageAlt: 'Profile Picture',
+        ogType: 'website',
+        ogSiteName: "Benpai's Website",
+        twitterCard: 'summary_large_image',
+        twitterImageAlt: 'Profile Picture',
+        twitterSite: '@therealbenpai',
+        twitterCreator: '@therealbenpai',
+    });
+}
 </script>
 
 <template>

@@ -1,17 +1,37 @@
 <script setup lang="ts">
-useHead({
-    title: 'Social Accounts',
-});
+const { data: socials } = await useFetch(`/api/social/all`);
 
-useSeoMeta(
-    Utilities.generateSEOMeta(
-        'Social Accounts',
-        'A list of all of my social media accounts.',
-        '/social',
-    ),
+defineOgImageComponent(
+    'BasicMetaBanner',
+    {
+        page: 'Social Accounts',
+        description: 'Information about the various social media accounts I have.',
+        icon: 'mdi:account-circle'
+    },
+    {
+        cacheMaxAgeSeconds: 180,
+        alt: `Social Accounts Banner`,
+    }
 );
 
-const { data: socials } = await useFetch(`/api/social/all`);
+const pageTitle = `Social Accounts - Benpai's Website`,
+    pageDescription = 'Information about the various social media accounts I have.';
+
+useSeoMeta({
+    ogUrl: `https://benshawmean.com/socials`,
+    ogTitle: pageTitle,
+    twitterTitle: pageTitle,
+    description: pageDescription,
+    ogDescription: pageDescription,
+    twitterDescription: pageDescription,
+    ogImageAlt: 'Profile Picture',
+    ogType: 'website',
+    ogSiteName: "Benpai's Website",
+    twitterCard: 'summary_large_image',
+    twitterImageAlt: 'Profile Picture',
+    twitterSite: '@therealbenpai',
+    twitterCreator: '@therealbenpai',
+});
 </script>
 
 <template>

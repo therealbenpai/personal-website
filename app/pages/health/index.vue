@@ -1,19 +1,39 @@
 <script setup lang="ts">
 import _ from 'lodash';
 
-useHead({
-    title: 'Health',
-});
+const { data: health } = await useFetch(`/api/health/all`);
 
-useSeoMeta(
-    Utilities.generateSEOMeta(
-        'Health',
-        'Information about my health and wellness.',
-        '/health'
-    )
+defineOgImageComponent(
+    'BasicMetaBanner',
+    {
+        page: 'Health Conditions',
+        description: 'A list of all of the health conditions I suffer from.',
+        icon: 'mdi:heart-pulse'
+    },
+    {
+        cacheMaxAgeSeconds: 180,
+        alt: `Health Conditions Banner`,
+    }
 );
 
-const { data: health } = await useFetch(`/api/health/all`);
+const pageTitle = `Health - Benpai's Website`,
+    pageDescription = 'Information about the various health conditions I suffer from.';
+
+useSeoMeta({
+    ogUrl: `https://benshawmean.com/health`,
+    ogTitle: pageTitle,
+    twitterTitle: pageTitle,
+    description: pageDescription,
+    ogDescription: pageDescription,
+    twitterDescription: pageDescription,
+    ogImageAlt: 'Profile Picture',
+    ogType: 'website',
+    ogSiteName: "Benpai's Website",
+    twitterCard: 'summary_large_image',
+    twitterImageAlt: 'Profile Picture',
+    twitterSite: '@therealbenpai',
+    twitterCreator: '@therealbenpai',
+});
 </script>
 
 <template>
@@ -39,7 +59,9 @@ const { data: health } = await useFetch(`/api/health/all`);
                             class="align-middle text-md font-medium text-stone-300"
                         >
                             Also known as:
-                            <span class="italic font-light pl-1">{{ condition.aka }}</span>
+                            <span class="italic font-light pl-1">{{
+                                condition.aka
+                            }}</span>
                         </p>
                         <p class="text-md text-stone-300 italic">
                             {{ condition.description.split('\n')[0] }}

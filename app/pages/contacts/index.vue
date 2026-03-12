@@ -1,17 +1,36 @@
 <script setup lang="ts">
-useHead({
-    title: 'Contact',
-});
+const { data: contacts } = await useFetch(`/api/contact/all`);
 
-useSeoMeta(
-    Utilities.generateSEOMeta(
-        'Contact',
-        'A list of all of the ways you can contact me.',
-        '/contacts',
-    ),
+defineOgImageComponent(
+    'BasicMetaBanner',
+    {
+        name: 'Contacts',
+        icon: 'mdi:phone'
+    },
+    {
+        cacheMaxAgeSeconds: 180,
+        alt: `Contacts Banner`,
+    }
 );
 
-const { data: contacts } = await useFetch(`/api/contact/all`);
+const pageTitle = `Contacts - Benpai's Website`,
+    pageDescription = 'Information about the various ways you can contact me.';
+
+useSeoMeta({
+    ogUrl: `https://benshawmean.com/contacts`,
+    ogTitle: pageTitle,
+    twitterTitle: pageTitle,
+    description: pageDescription,
+    ogDescription: pageDescription,
+    twitterDescription: pageDescription,
+    ogImageAlt: 'Profile Picture',
+    ogType: 'website',
+    ogSiteName: "Benpai's Website",
+    twitterCard: 'summary_large_image',
+    twitterImageAlt: 'Profile Picture',
+    twitterSite: '@therealbenpai',
+    twitterCreator: '@therealbenpai',
+});
 </script>
 
 <template>
